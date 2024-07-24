@@ -1,6 +1,7 @@
 import React from 'react'
 import './Login.css';
 import { useState } from 'react';
+import skylogo from '../UI/sky_logo.png';
 const Login = () => {
 
     const [isSignUp, setIsSignUp] = useState(false);
@@ -19,17 +20,20 @@ const Login = () => {
   };
   return (
     <>
+    <div className='logo-container'>
+        <img src={skylogo} width={'100px'} className='skylogo'></img>
+    </div>
     <div className={`container ${isSignUp ? 'active' : ''}`} class="container" id="container">
         <div class="form-container sign-up">
             <form onSubmit={handleSubmit} >
                 <h1>Create Account</h1>
-                <div class="social-icons">
+                {/*<div class="social-icons">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
                     <a href="#" class="social"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span>
+                </div>*/}
+                <span>use your email for registration</span>
                 <input type="text" placeholder="Name" />
                 <input type="email" placeholder="Email" />
                 <input type="password" placeholder="Password" />
@@ -39,13 +43,13 @@ const Login = () => {
         <div class="form-container sign-in">
             <form onSubmit={handleSubmit}>
                 <h1>Sign In</h1>
-                <div class="social-icons">
+               {/* <div class="social-icons">
                     <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social"><i class="fa-brands fa-google"></i></a>
                     <a href="#" class="social"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email password</span>
+                </div>*/}
+                <span>use your email password</span>
                 <input type="email" placeholder="Email" />
                 <input type="password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
