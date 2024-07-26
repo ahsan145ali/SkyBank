@@ -1,0 +1,22 @@
+{
+  "Customers": [
+    {
+      "id": "fea5",
+      "customerName": "john doe",
+      "customerEmail": "a@gmail.com",
+      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
+    },
+    {
+      "id": "2f16",
+      "customerName": "john doe3",
+      "customerEmail": "a@gmail.com",
+      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
+    },
+    {
+      "id": "b10d",
+      "customerName": "jj",
+      "customerEmail": "jj@gmail.com",
+      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
+    }
+  ]
+}
