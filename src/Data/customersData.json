@@ -7,34 +7,10 @@
       "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
     },
     {
-      "id": "2f16",
-      "customerName": "john doe3",
-      "customerEmail": "a@gmail.com",
-      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
-    },
-    {
-      "id": "b10d",
-      "customerName": "jj",
-      "customerEmail": "jj@gmail.com",
-      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
-    },
-    {
-      "id": "c887",
-      "customerName": "jj",
-      "customerEmail": "jj@gmail.com",
-      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
-    },
-    {
-      "id": "e563",
-      "customerName": "jj2",
-      "customerEmail": "jj@gmail.com",
-      "customerPassword": "88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589"
-    },
-    {
-      "id": "fe0f",
-      "customerName": "jj2",
-      "customerEmail": "jj@gmail.com",
-      "customerPassword": "d3bf0bc270c59f340b441dbc51f92cfcd9e9e21ad846fb605e49b93d1512e763"
+      "id": "221d",
+      "customerName": "test",
+      "customerEmail": "test@email.com",
+      "customerPassword": "7ce72ba3bb73aa0cda293a8a6477e17004abb1593e3396d52fbbe017ab7d5dd2"
     }
   ]
 }
