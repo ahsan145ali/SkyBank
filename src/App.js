@@ -2,14 +2,19 @@ import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
+import Header from './Components/TransactionPage/Header';
+import PayeeList from './Components/TransactionPage/PayeeList';
 function App() {
   return (
+
     <div>
       <Router>
         <AuthProvider>
+          <Header />
           <Routes>
            <Route path='/' element={<Login/>}/>
            <Route path='/homepage' element={<Homepage />}/>
+           <Route path='/Payeelist' element={<PayeeList/>}/>
            </Routes>
         </AuthProvider>
       </Router>
