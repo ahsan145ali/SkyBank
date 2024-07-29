@@ -1,10 +1,18 @@
 import './App.css';
-import TransactionHistory from './TransactionHistory/TransactionHistory';
-import './input.css'
-
+import Login from './LoginPage/Login';
+import { AuthProvider } from './Context/AuthContext';
+import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
 function App() {
   return (
-    <TransactionHistory/>
+    <div>
+      <Router>
+        <AuthProvider>
+          <Routes>
+           <Route path='/' element={<Login/>}/>
+           </Routes>
+        </AuthProvider>
+      </Router>
+    </div>
   );
 }
 
