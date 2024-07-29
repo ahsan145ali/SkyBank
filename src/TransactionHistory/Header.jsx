@@ -45,9 +45,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script> */}
   return (
-    <header className='w-full flex justify-between items-center'>
+    <header className='w-full flex justify-between items-center p-4'>
 
-    <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
+    <nav class="relative flex justify-between items-center bg-white">
       <div class="lg:hidden">
         <button class="navbar-burger flex items-center text-blue-600 p-3">
           <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
