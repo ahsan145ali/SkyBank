@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/Dashboard.css';
-import logo from '../logo.svg'
+import logo from '../TransactionHistory/sky-logo.png'
 
 const Dashboard = () => {
 
