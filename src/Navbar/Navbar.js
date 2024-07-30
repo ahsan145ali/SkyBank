@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import skylogo from '../UI/sky_logo.png';
 import './Navbar.css';
-import { Link,useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 const Navbar = () => {
     let pageLocation = useLocation();
     const navigate = useNavigate();

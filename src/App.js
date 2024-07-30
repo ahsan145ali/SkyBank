@@ -6,6 +6,7 @@ import Header from './Components/TransactionPage/Header';
 import PayeeList from './Components/TransactionPage/PayeeList';
 import Navbar from './Navbar/Navbar.js';
 import Dashboard from './Dashboard/Dashboard.jsx';
+import Footer from './Footer/Footer.js';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
            <Route path='/Payeelist' element={<PayeeList/>}/>
            </Routes>
         </AuthProvider>
+        
       </Router>
     </div>
   );
