@@ -10,15 +10,51 @@ const payees = [
 
 const PayeeList = () => {
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
+    <div style={styles.container}>
+      <h2 style={styles.header}>Recent Payees</h2>
       {payees.map((payee, index) => (
-        <div key={index} style={{ margin: '10px', padding: '20px', border: '1px solid #000', borderRadius: '5px' }}>
-          <h2>{payee.name}</h2>
-          <p>{payee.account}</p>
+        <div key={index} style={styles.payeeCard}>
+          <h3 style={styles.payeeName}>{payee.name}</h3>
+          <p style={styles.payeeAccount}>{payee.account}</p>
         </div>
       ))}
     </div>
   );
+};
+
+const styles = {
+  container: {
+    padding: '20px',
+    textAlign: 'center',
+  },
+  header: {
+    marginBottom: '20px',
+    fontSize: '24px',
+    color: '#333',
+    borderBottom: '2px solid #e0e0e0',
+    paddingBottom: '10px',
+  },
+  payeeCard: {
+    margin: '10px auto',
+    padding: '20px',
+    border: '1px solid #ddd',
+    borderRadius: '5px',
+    backgroundColor: 'white',
+    width: '80%',
+    maxWidth: '400px',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+  },
+  payeeName: {
+    margin: '0 0 10px 0',
+    fontSize: '18px',
+    fontWeight: 'bold',
+    color: '#007bff',
+  },
+  payeeAccount: {
+    margin: 0,
+    fontSize: '16px',
+    color: '#555',
+  },
 };
 
 export default PayeeList;
