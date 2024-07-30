@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/Dashboard.css';
-import logo from '../logo.svg'
+import logo from '../TransactionHistory/sky-logo.png'
 
 const Dashboard = () => {
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
             <div class="secondrowcontainer">
                 <div class="stockscard">
                     <div class="imagecontent">
-                    <img src={logo} alt="Logo" />;
+                    <img src={logo} class="imgdashboard" alt="Logo" />;
                         <p class="smallheading">Stocks &#40;template&#41; &rsaquo;</p>
                     </div>
                 </div>

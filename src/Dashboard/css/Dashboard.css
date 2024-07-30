@@ -150,7 +150,7 @@
     color: #000000;
   }
 
-  img {
+  .imgdashboard {
     display: flex;
     flex-direction: column;
     margin-left: auto;
