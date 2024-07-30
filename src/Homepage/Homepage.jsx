@@ -5,7 +5,7 @@ import Services from './Services.jsx';
 const Homepage = () => {
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <hr style=
                 {{
                     color: "black",

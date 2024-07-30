@@ -1,0 +1,53 @@
+.login-logo-container {
+    position: absolute;
+    background: linear-gradient(0deg, #e8e8e8 51%, #fff0f0 79%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 3px 5px 12px 1px #d6d6d6;
+  }
+.login-skylogo{
+    margin-left: 47%;
+    animation: skylogoanimlogin 3s ease 0s 1 normal forwards;
+}
+@keyframes skylogoanimlogin {
+	0% {
+		opacity: 0;
+		transform: scale(0.6);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* css for nav bar on all pages except Login Page*/
+.logo-container {
+    position: absolute;
+    background: linear-gradient(0deg, #f3f2f2 51%, #fff0f0 79%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 3px 2px 12px 1px #d6d6d6;
+  }
+.skylogo{
+    margin-left: 47%;
+    position: fixed;
+    
+}
+
+.optionBars{
+    float: right;
+    margin-top: 0.5%;
+}
+
+.userCircle{
+    float: left;
+    margin-top: 0.5%;
+}
+
+.userName{
+    float: left;
+    margin-top: 1.2%;
+}

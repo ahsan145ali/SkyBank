@@ -7,7 +7,8 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-body{
+
+.MainContainer{
     background-color: #354fb7;
     background: linear-gradient(90deg, rgba(255, 140, 0, 0.85) 0%, rgba(248, 0, 50, 0.85) 31%, rgba(255, 0, 160, 0.85) 54%, rgba(140, 40, 255, 0.85) 69%, rgba(0, 35, 255, 0.85) 86%, rgba(25, 160, 255, 0.85) 97%);
     display: flex;
@@ -15,30 +16,10 @@ body{
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    
+    
 }
-.logo-container {
-    position: absolute;
-    background: linear-gradient(0deg, #e8e8e8 51%, #fff0f0 79%);
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-shadow: 3px 5px 12px 1px #d6d6d6;
-  }
-.skylogo{
-    margin-left: 47%;
-    animation: skylogoanim 3s ease 0s 1 normal forwards;
-}
-@keyframes skylogoanim {
-	0% {
-		opacity: 0;
-		transform: scale(0.6);
-	}
 
-	100% {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
 .container{
     background-color: #fff;
     border-radius: 30px;

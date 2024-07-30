@@ -9,12 +9,12 @@ import 'devextreme/dist/css/dx.light.css';
 import {Popup} from 'devextreme-react/popup'; 
 import {useAuth} from '../Context/AuthContext';
 import { Link } from 'react-router-dom';
- 
 const Login = () => {
+    
     const baseCustomerUrl = "http://localhost:4000/Customers";
     const token = process.env.JWT_TOKEN; // get it from .env.local file
     const {storeContextToken} = useAuth();
-  
+
     //States
     const [isSignUp, setIsSignUp] = useState(false);
     const [customerName,setCustomerName] = useState('');
@@ -143,9 +143,7 @@ const Login = () => {
   //Database Functions End
   return (
     <>
-    <div className='logo-container'>
-        <img src={skylogo} width={'100px'} className='skylogo'></img>
-    </div>
+    <div className="MainContainer">
     <div className={`container ${isSignUp ? 'active' : ''}`} class="container" id="container">
         <div class="form-container sign-up">
             <form onSubmit={handleSubmitSignUp} >
@@ -200,7 +198,7 @@ const Login = () => {
             </div>
         </div>
     </div>
-    
+    </div>
     </>
   )
 }
