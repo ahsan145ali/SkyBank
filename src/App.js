@@ -4,13 +4,15 @@ import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
 import Header from './Components/TransactionPage/Header';
 import PayeeList from './Components/TransactionPage/PayeeList';
+import Navbar from './Navbar/Navbar.js';
 function App() {
   return (
 
     <div>
       <Router>
+        <Navbar/>
         <AuthProvider>
-          <Header />
+         { /* <Header /> */}
           <Routes>
            <Route path='/' element={<Login/>}/>
            <Route path='/homepage' element={<Homepage />}/>
