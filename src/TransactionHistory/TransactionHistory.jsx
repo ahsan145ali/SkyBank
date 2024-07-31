@@ -6,13 +6,10 @@ import History from './History'
 function TransactionHistory() {
 
   return (
-    <>
-      <Header />
-      <div className='container'>
+      <div className='tw-container'>
         <TransactionDetails balance={"2000.00"}/>
         <History />
       </div>
-    </>
   )
 }
 
