@@ -34,10 +34,14 @@ const Dashboard = () => {
             </div>
             <p>&nbsp;</p>
             <div class="secondrowcontainer">
-                <div class="stockscard" onClick={()=> goToPayeeList()}>
+                <div class="imagecard" onClick={()=> goToPayeeList()}>
+                    
                     <div class="imagecontent">
-                    <img src={logo} class="imgdashboard" alt="Logo" />;
-                        <p class="smallheading">Payee List &#40;template&#41; &rsaquo;</p>
+                         <div class="aligner">
+                         <img src={logo} class="imgdashboard" alt="Logo" /> &nbsp;
+                         <br></br> &nbsp;
+                            <p class="smallheading">Payee List &#40;template&#41; &rsaquo;</p>
+                    </div>
                     </div>
                 </div>
                 <div class ="columncontainer">
@@ -49,7 +53,7 @@ const Dashboard = () => {
                 <p>&nbsp;</p>
                 <div class="smallcard">
                     <div class="content">
-                    <p class="smallheading">Direct Debit &rsaquo;</p>
+                    <p class="smallheading">Direct Debits &rsaquo;</p>
                     </div>
                 </div>
                 </div>
@@ -60,3 +64,5 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+//                           
