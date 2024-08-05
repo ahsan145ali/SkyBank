@@ -1,4 +1,4 @@
-import Navbar from './Navbar.jsx';
+import React from 'react';
 import Info from './Info.jsx';
 import Services from './Services.jsx';
 
