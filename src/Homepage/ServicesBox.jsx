@@ -1,12 +1,14 @@
 import Service from "./Service";
-import '../App.css'
+import '../App.css';
 
 const ServicesBox = () => {
     return (
         <>
-            <table style={{position: "fixed", top: "40%", left: "25%", borderSpacing: "30px"}}>
+        <div style={{positionbackgroundColor: "blue", top: "50vh"}}>
+            <table style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", width: "200vh"}}>
                 <Service />
             </table>
+        </div>
         </>
     )
 }
