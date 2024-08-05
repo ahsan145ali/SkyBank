@@ -1,8 +1,11 @@
 // Header.js
 import React from 'react';
-import skyLogo from '../TransactionPage/Skylogo.jpeg'; // Adjust the path as needed
+import { useNavigate } from 'react-router-dom';
+import skyLogo from '../TransactionPage/Skylogo.jpeg'; 
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <header style={styles.header}>
       <div style={styles.logoContainer}>
@@ -10,8 +13,8 @@ const Header = () => {
         <h1>Welcome Elias</h1>
       </div>
       <div style={styles.buttonContainer}>
-        <button style={styles.button}>Pay</button>
-        <button style={styles.button}>Add Payee</button>
+        <button style={styles.button} onClick={() => navigate('/pay-payee')}>Pay</button>
+        <button style={styles.button} onClick={() => navigate('/add-payee')}>Add Payee</button>
       </div>
     </header>
   );

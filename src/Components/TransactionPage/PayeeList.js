@@ -1,19 +1,21 @@
-// components/PayeeList.js
-import React from 'react';
-
-const payees = [
-  { name: 'Alan', account: '20-10-56' },
-  { name: 'Elliot', account: '21-81-32' },
-  { name: 'Callum', account: '78-50-12' },
-  { name: 'Ahsan', account: '20-12-78' },
-];
+// PayeeList.js
+import React, { useContext } from 'react';
+import { PayeeContext } from './PayeeContext'; 
+import { useNavigate } from 'react-router-dom';
 
 const PayeeList = () => {
+  const { recentPayees } = useContext(PayeeContext);
+  const navigate = useNavigate();
+
+  const handlePayeeClick = (payee) => {
+    navigate('/pay-payee', { state: { payee } });
+  };
+
   return (
     <div style={styles.container}>
       <h2 style={styles.header}>Recent Payees</h2>
-      {payees.map((payee, index) => (
-        <div key={index} style={styles.payeeCard}>
+      {recentPayees.map((payee, index) => (
+        <div key={index} style={styles.payeeCard} onClick={() => handlePayeeClick(payee)}>
           <h3 style={styles.payeeName}>{payee.name}</h3>
           <p style={styles.payeeAccount}>{payee.account}</p>
         </div>
@@ -43,6 +45,7 @@ const styles = {
     width: '80%',
     maxWidth: '400px',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    cursor: 'pointer',
   },
   payeeName: {
     margin: '0 0 10px 0',
