@@ -2,13 +2,13 @@ import React from 'react'
 
 function TransactionItem({date, description, inAmount, outAmount, balance}) {
     return (
-        <div className='grid col-span-12 my-4 px-4 py-2 shadow-md'>
-            <div className='row-span-2 col-span-2 grid text-center'>
-                <p className=' col-start-1 order-2'>{date}</p>
-                <p className=' col-start-1'>{description}</p>
-                <p className=' hidden'></p>
-                <p className=' col-start-2'>{inAmount ? `£${inAmount}` : `-£${outAmount}`}</p>
-                <p className=' col-start-2 order-4'>£{balance}</p>
+        <div className='tw-grid tw-col-span-12 tw-my-4 tw-px-4 tw-py-2 tw-shadow-md'>
+            <div className='tw-row-span-2 tw-col-span-2 tw-grid tw-text-center'>
+                <p className='tw-col-start-1 tw-order-2'>{date}</p>
+                <p className='tw-col-start-1'>{description}</p>
+                <p className='tw-hidden'></p>
+                <p className='tw-col-start-2'>{inAmount ? `£${inAmount}` : `-£${outAmount}`}</p>
+                <p className='tw-col-start-2 tw-order-4'>£{balance}</p>
             </div>
         </div>
     )

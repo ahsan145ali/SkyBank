@@ -2,27 +2,26 @@ import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login';
 import { AuthProvider } from './Context/AuthContext';
 import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
-import Header from './Components/TransactionPage/Header';
 import PayeeList from './Components/TransactionPage/PayeeList';
 import Dashboard from './Dashboard/Dashboard.jsx';
-import TransactionHistory from './TransactionHistory/TransactionHistory.jsx';
+import TransactionHistory from './TransactionHistory/TransactionHistory.jsx'
+import Footer from './Footer/Footer.js';
+import './input.css'
 
 function App() {
   return (
-    <div>
       <Router>
+        {/* <Navbar/> */}
         <AuthProvider>
-          <Header />
           <Routes>
-            <Route path='/' element={<Homepage />}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/Payeelist' element={<PayeeList/>}/>
-            <Route path='/Dashboard' element={<Dashboard />}/>
-            <Route path='/Transactions' element={<TransactionHistory />}/>
+           <Route path='/' element={<Login/>}/>
+           <Route path='/homepage' element={<Homepage />}/>
+           <Route path='/dashboard' element={<Dashboard />}/>
+           <Route path='/Payeelist' element={<PayeeList/>}/>
+
            </Routes>
         </AuthProvider>
       </Router>
-    </div>
   );
 }
 
