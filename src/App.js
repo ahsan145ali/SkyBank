@@ -15,7 +15,6 @@ import Navbar from './Navbar/Navbar.js';
 import Dashboard from './Dashboard/Dashboard.jsx';
 import TransactionHistory from './TransactionHistory/TransactionHistory.jsx'
 import Footer from './Footer/Footer.js';
-
 import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login.js';
 import './input.css'
@@ -45,7 +44,7 @@ function App() {
            <Route path='/homepage' element={<Homepage />}/>
            <Route path='/dashboard' element={<Dashboard />}/>
            <Route path='/Payeelist' element={<PayeeList/>}/>
-           <Route path='/transactions' element={<TransactionHistory/>}/>
+
            </Routes>
 
         </AuthProvider>
