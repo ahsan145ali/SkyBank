@@ -1,13 +1,29 @@
 import React from 'react'
+import BankCard from './card.jpeg'
 
-function TransactionDetails({balance}) {
+function TransactionDetails({ balance }) {
     return (
         <section className='tw-flex tw-flex-col tw-mx-6 tw-p-4 tw-shadow-md'>
-            <div>
-                <p>Available Balance: </p>
-                <p>£{balance}</p>
+            <div className='md:tw-block md:tw-min-h-44'>
+                <div className='md:tw-grid md:tw-grid-cols-12'>
+                    <div className='md:tw-grid md:tw-col-span-6'>
+                        <img src={BankCard} className='tw-hidden md:tw-block tw-row-start-1 tw-row-span-2' />
+                        <div className='tw-hidden md:tw-flex md:tw-flex-col md:tw-col-start-2 md:tw-gap-2 md:tw-justify-center'>
+                            <p className=''>Alans Debit Card</p>
+                            <p className=''>12-34-45</p>
+                            <p className=''>6789101112</p>
+                        </div>
+                        <div className='md:tw-row-start-2'>
+                            <p>Available Balance: </p>
+                            <p>£{balance}</p>
+                        </div>
+                    </div>
+                    <div className='md:tw-row-start-4 md:tw-col-start-4 md:tw-col-span-3 md:tw-flex md:tw-gap-2'>
+                        <button className='tw-bg-blue-700 tw-text-white tw-w-3/4 md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Transfer</button>
+                        <button className='tw-hidden md:tw-block tw-bg-blue-700 tw-text-white tw-w-3/4 md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Payment</button>
+                    </div>
+                </div>
             </div>
-            <button className='tw-bg-blue-700 tw-text-white tw-w-3/4 tw-rounded-lg tw-self-center'>Move Money</button>
         </section>
     )
 }
