@@ -15,49 +15,45 @@ const Dashboard = () => {
         navigate("/Payeelist");
     }
 
-    useEffect(()=>{
-        const getToken = sessionStorage.getItem("sessionToken");
-      },[])
-
     return (
         <>
-        <div class="container">
+        <div className="container">
             <p>&nbsp;</p>
-            <div class="card" onClick={()=> goToTransactions()}>
-                <div class="content" >
-                    <p class="heading">Balance
-                        <span class="balance" >
+            <div className="card" onClick={()=> goToTransactions()}>
+                <div className="content" >
+                    <p className="heading">Balance
+                        <span className="balance" >
                             £20,000
                         </span>
                         </p>
 
-                    <p class="para" >
+                    <p className="para" >
                         Click here to view your transactions &rsaquo;
                    </p>
                 </div>
             </div>
             <p>&nbsp;</p>
-            <div class="secondrowcontainer">
-                <div class="imagecard" onClick={()=> goToPayeeList()}>
+            <div className="secondrowcontainer">
+                <div className="imagecard" onClick={()=> goToPayeeList()}>
                     
-                    <div class="imagecontent">
-                         <div class="aligner">
-                         <img src={logo} class="imgdashboard" alt="Logo" /> &nbsp;
+                    <div className="imagecontent">
+                         <div className="aligner">
+                         <img src={logo} className="imgdashboard" alt="Logo" /> &nbsp;
                          <br></br> &nbsp;
-                            <p class="smallheading">Payee List &#40;template&#41; &rsaquo;</p>
+                            <p className="smallheading">Payee List &#40;template&#41; &rsaquo;</p>
                     </div>
                     </div>
                 </div>
-                <div class ="columncontainer">
-                <div class="smallcard">
-                    <div class="content">
-                    <p class="smallheading">Account &rsaquo;</p>
+                <div className ="columncontainer">
+                <div className="smallcard">
+                    <div className="content">
+                    <p className="smallheading">Account &rsaquo;</p>
                     </div>
                 </div>
                 <p>&nbsp;</p>
-                <div class="smallcard">
-                    <div class="content">
-                    <p class="smallheading">Direct Debits &rsaquo;</p>
+                <div className="smallcard">
+                    <div className="content">
+                    <p className="smallheading">Direct Debits &rsaquo;</p>
                     </div>
                 </div>
                 </div>
