@@ -6,8 +6,6 @@ import { AuthProvider } from './Context/AuthContext';
 import { PayeeProvider } from './Components/TransactionPage/PayeeContext'; // Adjust the path
 import Header from './Components/TransactionPage/Header';
 
-import { BrowserRouter as Router , Routes , Route } from 'react-router-dom';
-
 import PayeeList from './Components/TransactionPage/PayeeList';
 import AddPayee from './Components/TransactionPage/AddPayee';
 import PayPayee from './Components/TransactionPage/PayPayee';
@@ -17,7 +15,7 @@ import TransactionHistory from './TransactionHistory/TransactionHistory.jsx'
 import Footer from './Footer/Footer.js';
 import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login.js';
-import './input.css'
+// import './input.css'
 
 
 function App() {
