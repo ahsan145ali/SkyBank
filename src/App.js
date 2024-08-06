@@ -26,7 +26,7 @@ function App() {
         <AuthProvider>
 
           <PayeeProvider>
-            <Header />
+            {/* <Header /> */}
             <Routes>
               {/* <Route path='/' element={<Login/>}/>
               <Route path='/homepage' element={<Homepage />}/>

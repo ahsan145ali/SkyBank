@@ -4,11 +4,9 @@ import '../App.css';
 const ServicesBox = () => {
     return (
         <>
-        <div style={{positionbackgroundColor: "blue", zIndex: 5}}>
-            <table style={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", width: "200vh"}}>
+            <table style={{position: "fixed", top: "40%", left: "25%", borderSpacing: "30px"}}>
                 <Service />
             </table>
-        </div>
         </>
     )
 }
