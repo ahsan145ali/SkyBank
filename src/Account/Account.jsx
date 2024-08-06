@@ -1,20 +1,16 @@
 // components/PayeeList.js
 import React from 'react';
 
-const account = [
-  { name: 'Callum'},
+const name = [
+  { firstName: 'Callum', lastName: 'Young'},
 ];
 
-const PayeeList = () => {
+const Account = () => {
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      {payees.map((account, index) => (
-        <div key={index} style={{ margin: '10px', padding: '20px', border: '1px solid #000', borderRadius: '5px' }}>
-          <h2>{payee.name}</h2>
-          <p>{payee.account}</p>
-        </div>
-      ))}
-    </div>
+    <>
+    <h1>Hello {firstName} {lastName}</h1>
+    <h2>Manage your account settings</h2>
+    </>
   );
 };
 

@@ -15,6 +15,10 @@ const Dashboard = () => {
         navigate("/Payeelist");
     }
 
+    useEffect(()=>{
+        const getToken = sessionStorage.getItem("sessionToken");
+      },[])
+
     return (
         <>
         <div class="container">
@@ -63,6 +67,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
-
-//                           
+export default Dashboard;                           
