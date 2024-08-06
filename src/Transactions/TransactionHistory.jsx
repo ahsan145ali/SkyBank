@@ -1,5 +1,4 @@
 import React from 'react'
-import Header from './Header'
 import TransactionDetails from './TransactionDetails'
 import History from './History'
 

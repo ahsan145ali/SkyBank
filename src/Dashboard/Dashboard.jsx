@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/Dashboard.css';
-import logo from '../TransactionHistory/sky-logo.png'
+import logo from '../Transactions/sky-logo.png'
 import { useNavigate } from "react-router-dom"
 
 

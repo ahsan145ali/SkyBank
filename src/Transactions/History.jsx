@@ -8,13 +8,6 @@ function History() {
                 <h1 className='tw-col-span-12 tw-text-center tw-font-bold'>July 2024</h1>
                 {/* Transaction table */}
                 <div className='tw-col-span-12 tw-grid'>
-                    {/* <div className='tw-flex tw-content-between'>
-                        <h2>Date</h2>
-                        <h2>Description</h2>
-                        <h2>In(£)</h2>
-                        <h2>Out(£)</h2>
-                        <h2>Balance(£)</h2>
-                    </div> */}
                     {/* Record */}
                     <TransactionItem date="23 July" description="Just Eat" outAmount={"25.00"} balance={"2000.00"}/>
                     <TransactionItem date="22 July" description="British Gas" outAmount={"175.00"} balance={"2025.00"}/>
