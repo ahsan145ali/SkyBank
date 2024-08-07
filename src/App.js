@@ -17,7 +17,7 @@ import './input.css';
 
 
 function App() {
-  var getToken = false;
+  var getToken = true;
   return (
 
       <Router>
