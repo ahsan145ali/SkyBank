@@ -13,10 +13,11 @@ import TransactionHistory from './Transactions/TransactionHistory.jsx'
 import Footer from './Footer/Footer.js';
 import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login.js';
-import './input.css'
+import './input.css';
 
 
 function App() {
+  var getToken = false;
   return (
 
       <Router>
@@ -36,12 +37,15 @@ function App() {
           </PayeeProvider>
 
           <Routes>
+           {getToken? <>
            <Route path='/' element={<Login/>}/>
            <Route path='/homepage' element={<Homepage />}/>
            <Route path='/dashboard' element={<Dashboard />}/>
            <Route path='/Payeelist' element={<PayeeList/>}/>
            <Route path='/transactions' element={<TransactionHistory/>}/>
+           </>:<Route path='/' element={<Login />}/>}{!getToken && <Route to="/"/>}
            </Routes>
+
 
         </AuthProvider>
       </Router>
