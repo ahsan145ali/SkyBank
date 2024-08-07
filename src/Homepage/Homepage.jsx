@@ -1,11 +1,12 @@
-import Navbar from './Navbar.jsx';
+import React from 'react';
 import Info from './Info.jsx';
 import Services from './Services.jsx';
+import Navbar from './Navbar.jsx';
 
 const Homepage = () => {
     return (
         <>
-            {/*<Navbar />*/}
+            <Navbar />
             <hr style=
                 {{
                     color: "black",
@@ -15,8 +16,10 @@ const Homepage = () => {
                 }}
             />
             <Info vertical="20%" horizontal="10%"/>
+            <container>
             <Services />
-        </>
+            </container>
+        </> 
     )
 }
 

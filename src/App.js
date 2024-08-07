@@ -4,6 +4,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './Context/AuthContext';
 import { PayeeProvider } from './Components/TransactionPage/PayeeContext'; // Adjust the path
 import Header from './Components/TransactionPage/Header';
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> 2ca1f0dc98a5c589e1a412c04f15b78bded2562f
+=======
+>>>>>>> 00bbe731762ea7ef4ebebab57a850f06219f27dd
 import PayeeList from './Components/TransactionPage/PayeeList';
 import AddPayee from './Components/TransactionPage/AddPayee';
 import PayPayee from './Components/TransactionPage/PayPayee';
@@ -13,19 +20,22 @@ import TransactionHistory from './Transactions/TransactionHistory.jsx'
 import Footer from './Footer/Footer.js';
 import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login.js';
+<<<<<<< HEAD
+// import './input.css'
+=======
 import './input.css';
+>>>>>>> 00bbe731762ea7ef4ebebab57a850f06219f27dd
 
 
 function App() {
   var getToken = true;
   return (
-
       <Router>
         <Navbar/>
         <AuthProvider>
           
           <PayeeProvider>
-            <Header />
+            {/* <Header /> */}
             <Routes>
               {/* <Route path='/' element={<Login/>}/>
               <Route path='/homepage' element={<Homepage />}/>
@@ -42,8 +52,12 @@ function App() {
            <Route path='/homepage' element={<Homepage />}/>
            <Route path='/dashboard' element={<Dashboard />}/>
            <Route path='/Payeelist' element={<PayeeList/>}/>
+<<<<<<< HEAD
+
+=======
            <Route path='/transactions' element={<TransactionHistory/>}/>
            </>:<Route path='/' element={<Login />}/>}{!getToken && <Route to="/"/>}
+>>>>>>> 00bbe731762ea7ef4ebebab57a850f06219f27dd
            </Routes>
 
 
