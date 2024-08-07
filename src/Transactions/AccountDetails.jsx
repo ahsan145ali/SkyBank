@@ -1,7 +1,7 @@
 import React from 'react'
 import BankCard from './card.jpeg'
 
-function TransactionDetails({ balance }) {
+function AccountDetails({ balance }) {
     return (
         <section className='tw-flex tw-flex-col tw-mx-6 tw-p-4 tw-shadow-md'>
             <div className='md:tw-block md:tw-min-h-44'>
@@ -28,4 +28,4 @@ function TransactionDetails({ balance }) {
     )
 }
 
-export default TransactionDetails
+export default AccountDetails
