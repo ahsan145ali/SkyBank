@@ -8,21 +8,31 @@ import TransactionHistory from './Transactions/TransactionHistory.jsx';
 import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login.js';
 import './input.css';
-
 function App() {
+  var getToken = true;
   return (
-    <Router>
-      <Navbar />
-      <AuthProvider>
-        <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/homepage' element={<Homepage />} />
-          <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/Payeelist' element={<PayeeList />} />
-          <Route path='/transactions' element={<TransactionHistory />} />
-        </Routes>
-      </AuthProvider>
-    </Router>
+
+    
+
+      <Router>
+        <Navbar/>
+        <AuthProvider>
+         
+          <Routes>
+           {getToken? <>
+           <Route path='/' element={<Login/>}/>
+           <Route path='/homepage' element={<Homepage />}/>
+           <Route path='/dashboard' element={<Dashboard />}/>
+           <Route path='/Payeelist' element={<PayeeList/>}/>
+
+           <Route path='/transactions' element={<TransactionHistory/>}/>
+           </>:<Route path='/' element={<Login />}/>}{!getToken && <Route to="/"/>}
+           </Routes>
+
+
+        </AuthProvider>
+      </Router>
+
   );
 }
 
