@@ -1,6 +1,6 @@
 // AddPayee.js
 import React, { useState, useContext } from 'react';
-import { PayeeContext } from './PayeeContext'; 
+import { PayeeContext } from './PayeeContext';
 
 const AddPayee = () => {
   const [name, setName] = useState('');
