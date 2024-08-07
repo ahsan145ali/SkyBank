@@ -20,7 +20,6 @@ import Login from './LoginPage/Login.js';
 
 function App() {
   return (
-
       <Router>
         {/* <Navbar/> */}
         <AuthProvider>

@@ -16,9 +16,9 @@ const Homepage = () => {
                 }}
             />
             <Info vertical="20%" horizontal="10%"/>
-            <div style={{backgroundColor: "blue"}}>
+            <container>
             <Services />
-            </div>
+            </container>
         </> 
     )
 }

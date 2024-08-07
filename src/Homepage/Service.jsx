@@ -1,7 +1,3 @@
-import '../App.css'
-
-
-
 const Service = (props) => {
     return (
         <>
