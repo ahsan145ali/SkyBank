@@ -1,15 +1,12 @@
-// AddPayee.js
-import React, { useState, useContext } from 'react';
-import { PayeeContext } from './PayeeContext';
+import React, { useState } from 'react';
 
-const AddPayee = () => {
+const AddPayee = ({ onAddPayee }) => {
   const [name, setName] = useState('');
   const [account, setAccount] = useState('');
-  const { addPayee } = useContext(PayeeContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addPayee({ name, account });
+    onAddPayee({ name, account });
     setName('');
     setAccount('');
     alert('Payee added successfully');

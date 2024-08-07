@@ -1,20 +1,49 @@
-import React, { useContext, useState } from 'react';
-import { PayeeContext } from './PayeeContext';
+import React, { useState, useEffect } from 'react';
 import AddPayee from './AddPayee';
 import PayPayee from './PayPayee';
 
 const PayeeList = () => {
-  const { recentPayees, payees, addRecentPayee } = useContext(PayeeContext);
+  const [payees, setPayees] = useState([]);
+  const [recentPayees, setRecentPayees] = useState([]);
   const [showAddPayee, setShowAddPayee] = useState(false);
   const [showPayPayee, setShowPayPayee] = useState(false);
   const [balance, setBalance] = useState(5000);
 
-  const handleAddPayee = () => {
+  useEffect(() => {
+    const storedPayees = localStorage.getItem('payees');
+    const storedRecentPayees = localStorage.getItem('recentPayees');
+    if (storedPayees) setPayees(JSON.parse(storedPayees));
+    if (storedRecentPayees) setRecentPayees(JSON.parse(storedRecentPayees));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('payees', JSON.stringify(payees));
+  }, [payees]);
+
+  useEffect(() => {
+    localStorage.setItem('recentPayees', JSON.stringify(recentPayees));
+  }, [recentPayees]);
+
+  const addPayee = (payee) => {
+    setPayees([...payees, payee]);
+    setShowAddPayee(false);
+  };
+
+  const handlePayment = (amount, payeeName) => {
+    setBalance(balance - amount);
+    const payee = payees.find(p => p.name === payeeName);
+    if (payee) {
+      setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]);
+    }
+    setShowPayPayee(false);
+  };
+
+  const handleShowAddPayee = () => {
     setShowAddPayee(true);
     setShowPayPayee(false);
   };
 
-  const handlePayPayee = () => {
+  const handleShowPayPayee = () => {
     setShowPayPayee(true);
     setShowAddPayee(false);
   };
@@ -24,25 +53,20 @@ const PayeeList = () => {
     setShowPayPayee(false);
   };
 
-  const handlePayment = (amount, payeeName) => {
-    setBalance(balance - amount);
-    addRecentPayee(payeeName);
-  };
-
   return (
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
-        <button onClick={handleAddPayee} style={styles.button}>Add Payee</button>
-        <button onClick={handlePayPayee} style={styles.button}>Pay Payee</button>
+        <button onClick={handleShowAddPayee} style={styles.button}>Add Payee</button>
+        <button onClick={handleShowPayPayee} style={styles.button}>Pay Payee</button>
       </div>
       {showAddPayee ? (
         <>
-          <AddPayee />
+          <AddPayee onAddPayee={addPayee} />
           <button onClick={handleBack} style={styles.button}>Back</button>
         </>
       ) : showPayPayee ? (
         <>
-          <PayPayee onPayment={handlePayment} />
+          <PayPayee payees={payees} onPayment={handlePayment} />
           <button onClick={handleBack} style={styles.button}>Back</button>
         </>
       ) : (
@@ -50,7 +74,7 @@ const PayeeList = () => {
           <h3 style={styles.balance}>Balance: ${balance}</h3>
           <h2 style={styles.header}>Recent Payees</h2>
           {recentPayees.map((payee, index) => (
-            <div key={index} style={styles.payeeCard} onClick={handlePayPayee}>
+            <div key={index} style={styles.payeeCard} onClick={handleShowPayPayee}>
               <h3 style={styles.payeeName}>{payee.name}</h3>
               <p style={styles.payeeAccount}>{payee.account}</p>
             </div>

@@ -1,11 +1,8 @@
-// PayPayee.js
-import React, { useState, useContext } from 'react';
-import { PayeeContext } from './PayeeContext';
+import React, { useState } from 'react';
 
-const PayPayee = ({ onPayment }) => {
+const PayPayee = ({ onPayment, payees }) => {
   const [selectedPayee, setSelectedPayee] = useState('');
   const [amount, setAmount] = useState('');
-  const { payees } = useContext(PayeeContext);
 
   const handlePay = (e) => {
     e.preventDefault();
