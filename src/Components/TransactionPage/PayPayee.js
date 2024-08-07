@@ -1,29 +1,16 @@
-// PayPayee.js
-import React, { useState, useContext, useEffect } from 'react';
-import { PayeeContext } from './PayeeContext'; 
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
 
-const PayPayee = () => {
+const PayPayee = ({ onPayment, payees }) => {
   const [selectedPayee, setSelectedPayee] = useState('');
   const [amount, setAmount] = useState('');
-  const { payees, addRecentPayee } = useContext(PayeeContext);
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.state && location.state.payee) {
-      setSelectedPayee(location.state.payee.name);
-    }
-  }, [location.state]);
 
   const handlePay = (e) => {
     e.preventDefault();
     if (selectedPayee && amount) {
-      addRecentPayee(selectedPayee);
+      onPayment(parseFloat(amount), selectedPayee);
       alert(`Payment of $${amount} to ${selectedPayee} successful`);
       setSelectedPayee('');
       setAmount('');
-      navigate('/'); // Redirect to home page
     }
   };
 
