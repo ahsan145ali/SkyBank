@@ -19,8 +19,8 @@ function AccountDetails({ balance }) {
                         </div>
                     </div>
                     <div className='md:tw-row-start-4 md:tw-col-start-4 md:tw-col-span-3 md:tw-flex md:tw-gap-2'>
-                        <button className='tw-bg-blue-700 tw-text-white tw-w-3/4 md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Transfer</button>
-                        <button className='tw-hidden md:tw-block tw-bg-blue-700 tw-text-white tw-w-3/4 md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Payment</button>
+                        <button className='tw-bg-blue-700 tw-text-white md:tw-min-w-48 tw-p-2 tw-rounded-lg tw-self-center'>Make a Transfer</button>
+                        <button className='tw-hidden md:tw-block tw-bg-blue-700 tw-text-white md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Payment</button>
                     </div>
                 </div>
             </div>

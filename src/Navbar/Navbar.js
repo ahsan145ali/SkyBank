@@ -15,7 +15,7 @@ const Navbar = () => {
         const goToHomePage = () => {
             navigate("/homepage");
         }
-        if (pageLocation.pathname != "/" && pageLocation.pathname != '/homepage') {
+        if (pageLocation.pathname !== "/" && pageLocation.pathname !== '/homepage') {
             return (
 
                 <header className='tw-flex tw-justify-between tw-w-full tw-px-4 tw-shadow-md'>
@@ -32,18 +32,18 @@ const Navbar = () => {
                 </header>
             )
         }
-        else if (pageLocation.pathname == '/') {
+        else if (pageLocation.pathname === '/') {
             return (
                 <div className='login-logo-container'>
                     <img src={skylogo} width={'100px'} className='login-skylogo' onClick={goToHomePage}></img>
                 </div>
             )
         }
-        else if (pageLocation.pathname == '/homepage') {
+        else if (pageLocation.pathname === '/homepage') {
             return (
                 <header className='tw-flex tw-justify-between tw-w-full tw-p-4'>
                     <div className='tw-flex tw-items-center'>
-                        <button className="button" onClick={goToLogin}>Login</button>
+                        <button className="button" onClick={goToLogin}>Login / Sign Up</button>
                     </div>
                     <img src={skylogo} width={'80px'} className='skylogo'></img>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="optionBars" width={'40px'}>

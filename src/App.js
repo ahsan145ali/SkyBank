@@ -9,11 +9,11 @@ import AddPayee from './Components/TransactionPage/AddPayee';
 import PayPayee from './Components/TransactionPage/PayPayee';
 import Navbar from './Navbar/Navbar.js';
 import Dashboard from './Dashboard/Dashboard.jsx';
-import TransactionHistory from './Transactions/TransactionHistory.jsx'
 import Footer from './Footer/Footer.js';
 import Homepage from './Homepage/Homepage.jsx';
 import Login from './LoginPage/Login.js';
 import './input.css'
+import TransactionPage from './Transactions/TransactionPage.jsx';
 
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
            <Route path='/homepage' element={<Homepage />}/>
            <Route path='/dashboard' element={<Dashboard />}/>
            <Route path='/Payeelist' element={<PayeeList/>}/>
-           <Route path='/transactions' element={<TransactionHistory/>}/>
+           <Route path='/transactions' element={<TransactionPage/>}/>
            </Routes>
 
         </AuthProvider>
