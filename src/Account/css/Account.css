@@ -9,7 +9,7 @@
     box-shadow: rgba(115, 0, 247, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
   }
 
-  .card, .imagecard, .smallcard{
+  .card, .stockscard, .smallcard{
     display: flex;
     position: relative;
 
@@ -29,8 +29,9 @@
     justify-content: center;
   }
 
-  .imagecard {
+  .stockscard {
     flex:1;
+
     width:100%;
     align-items: center;
     justify-content: center;
@@ -39,6 +40,7 @@
   }
 
   .smallcard{
+
     align-items: center;
     justify-content: center;
   }
@@ -74,14 +76,8 @@
 
   .imagecontent {
     gap: 0px;
-    height: 100%;
-    line-height: 100%;
-}
 
-.aligner{
-  margin-top: 5%;
-  height: 100%;
-  z-index: 0;
+
 }
   
   .heading, .smallheading{
@@ -96,6 +92,7 @@
 
   .heading, .balance, .para{
     font-size: 24px;
+
   }
 
   .smallheading{
@@ -118,7 +115,7 @@
     transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1);
   }
   
-  .card::before, .imagecard::before ,.smallcard::before{
+  .card::before, .stockscard::before ,.smallcard::before{
     content: "";
     position: absolute;
     height: 1000%;
@@ -131,20 +128,20 @@
     transition: all 0.88s cubic-bezier(0.23, 1, 0.32, 1);
   }
   
-  .card:hover::before , .imagecard:hover::before, .smallcard:hover::before {
+  .card:hover::before , .stockscard:hover::before, .smallcard:hover::before {
     animation-play-state: running;
     z-index: -1;
     width: 20%;
   }
   
   .card:hover .content .heading,
-  .imagecard:hover .imagecontent .aligner .smallheading,
+  .stockscard:hover .imagecontent .smallheading,
   .smallcard:hover .content .smallheading,
   .card:hover .content .para{
     color: #000000;
   }
   
-  .card:hover, .imagecard:hover, .smallcard:hover {
+  .card:hover, .stockscard:hover, .smallcard:hover {
     box-shadow: 0rem 6px 13px rgba(10, 60, 255, 0.1),
       0rem 24px 24px rgba(10, 60, 255, 0.09),
       0rem 55px 33px rgba(10, 60, 255, 0.05),
