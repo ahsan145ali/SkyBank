@@ -21,9 +21,9 @@ function App() {
   return (
 
       <Router>
-        {/* <Navbar/> */}
+        <Navbar/>
         <AuthProvider>
-
+          
           <PayeeProvider>
             <Header />
             <Routes>
