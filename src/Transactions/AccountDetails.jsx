@@ -1,7 +1,15 @@
 import React from 'react'
 import BankCard from './card.jpeg'
+import { useNavigate } from "react-router-dom"
 
-function TransactionDetails({ balance }) {
+
+function AccountDetails({ balance }) {
+    const navigate = useNavigate()
+
+    const goToPayee=()=>{
+        navigate("/PayeeList");
+    }
+
     return (
         <section className='tw-flex tw-flex-col tw-mx-6 tw-p-4 tw-shadow-md'>
             <div className='md:tw-block md:tw-min-h-44'>
@@ -19,8 +27,7 @@ function TransactionDetails({ balance }) {
                         </div>
                     </div>
                     <div className='md:tw-row-start-4 md:tw-col-start-4 md:tw-col-span-3 md:tw-flex md:tw-gap-2'>
-                        <button className='tw-bg-blue-700 tw-text-white tw-w-3/4 md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Transfer</button>
-                        <button className='tw-hidden md:tw-block tw-bg-blue-700 tw-text-white tw-w-3/4 md:tw-min-w-48 md:tw-p-2 tw-rounded-lg tw-self-center'>Make a Payment</button>
+                        <button className='tw-bg-blue-700 tw-text-white md:tw-min-w-48 tw-p-2 tw-rounded-lg tw-self-center' onClick={() => goToPayee()}>Make a Payment</button>
                     </div>
                 </div>
             </div>
@@ -28,4 +35,4 @@ function TransactionDetails({ balance }) {
     )
 }
 
-export default TransactionDetails
+export default AccountDetails

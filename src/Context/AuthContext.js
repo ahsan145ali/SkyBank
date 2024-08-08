@@ -5,7 +5,7 @@ const AuthContext = createContext(null);
 
 // Create a provider component
 export const AuthProvider = ({ children }) => {
-  const [contextToken, setContextToken] = useState(null);
+  const [contextToken, setContextToken] = useState("hardcoded for testing");
 
   const storeContextToken = (newToken) => {
     setContextToken(newToken);
