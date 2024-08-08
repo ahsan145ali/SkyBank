@@ -18,7 +18,7 @@ const Dashboard = () => {
     return (
         <>
         <div className="container">
-            <p>&nbsp;</p>
+            
             <div className="card" onClick={()=> goToTransactions()}>
                 <div className="content" >
                     <p className="heading">Balance
@@ -32,7 +32,7 @@ const Dashboard = () => {
                    </p>
                 </div>
             </div>
-            <p>&nbsp;</p>
+
             <div className="secondrowcontainer">
                 <div className="imagecard" onClick={()=> goToPayeeList()}>
                     
