@@ -16,7 +16,9 @@ const Navbar = () => {
         const goToHomePage = () => {
             navigate("/homepage");
         }
-
+        const gotoDashboard =()=>{
+            navigate("/dashboard")
+        }
         if (pageLocation.pathname !== "/" && pageLocation.pathname !== '/homepage') {
             return (
                 <div className={`tw-relative ${isOpen ? 'tw-pr-64' : ''}`}>
@@ -72,7 +74,7 @@ const Navbar = () => {
                         <button className="button" onClick={goToLogin}>Login / Sign Up</button>
                     </div>
                     <img src={skylogo} width={'80px'} className='skylogo'></img>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="optionBars" width={'40px'}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" /*strokeWidth={1.5} stroke="currentColor" */ className="optionBars" width={'40px'}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </header>
