@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const PayPayee = ({ onPayment, payees }) => {
-  const [selectedPayee, setSelectedPayee] = useState('');
+const PayPayee = ({ onPayment, payees, selectedPayee }) => {
+  const [payee, setPayee] = useState('');
   const [amount, setAmount] = useState('');
+
+  useEffect(() => {
+    if (selectedPayee) {
+      setPayee(selectedPayee);
+    }
+  }, [selectedPayee]);
 
   const handlePay = (e) => {
     e.preventDefault();
-    if (selectedPayee && amount) {
-      onPayment(parseFloat(amount), selectedPayee);
-      alert(`Payment of $${amount} to ${selectedPayee} successful`);
-      setSelectedPayee('');
+    if (payee && amount) {
+      onPayment(parseFloat(amount), payee);
+      alert(`Payment of $${amount} to ${payee} successful`);
+      setPayee('');
       setAmount('');
     }
   };
@@ -19,8 +25,8 @@ const PayPayee = ({ onPayment, payees }) => {
       <h2>Pay Payee</h2>
       <form onSubmit={handlePay} style={styles.form}>
         <select
-          value={selectedPayee}
-          onChange={(e) => setSelectedPayee(e.target.value)}
+          value={payee}
+          onChange={(e) => setPayee(e.target.value)}
           style={styles.select}
           required
         >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AddPayee from './AddPayee';
 import PayPayee from './PayPayee';
 
@@ -7,22 +7,8 @@ const PayeeList = () => {
   const [recentPayees, setRecentPayees] = useState([]);
   const [showAddPayee, setShowAddPayee] = useState(false);
   const [showPayPayee, setShowPayPayee] = useState(false);
+  const [selectedPayee, setSelectedPayee] = useState(null);
   const [balance, setBalance] = useState(5000);
-
-  useEffect(() => {
-    const storedPayees = localStorage.getItem('payees');
-    const storedRecentPayees = localStorage.getItem('recentPayees');
-    if (storedPayees) setPayees(JSON.parse(storedPayees));
-    if (storedRecentPayees) setRecentPayees(JSON.parse(storedRecentPayees));
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('payees', JSON.stringify(payees));
-  }, [payees]);
-
-  useEffect(() => {
-    localStorage.setItem('recentPayees', JSON.stringify(recentPayees));
-  }, [recentPayees]);
 
   const addPayee = (payee) => {
     setPayees([...payees, payee]);
@@ -30,24 +16,28 @@ const PayeeList = () => {
   };
 
   const handlePayment = (amount, payeeName) => {
-    setBalance(balance - amount);
-    const payee = payees.find(p => p.name === payeeName);
+    setBalance(balance - amount); 
+    const payee = payees.find(p => p.name === payeeName); // Find the payee
     if (payee) {
-      setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]);
+      setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]); // Update recent payees
     }
     setShowPayPayee(false);
   };
+
 
   const handleShowAddPayee = () => {
     setShowAddPayee(true);
     setShowPayPayee(false);
   };
 
-  const handleShowPayPayee = () => {
+
+  const handleShowPayPayee = (payeeName = null) => {
+    setSelectedPayee(payeeName); // Set the selected payee
     setShowPayPayee(true);
     setShowAddPayee(false);
   };
 
+  // Function to hide both forms
   const handleBack = () => {
     setShowAddPayee(false);
     setShowPayPayee(false);
@@ -57,7 +47,7 @@ const PayeeList = () => {
     <div style={styles.container}>
       <div style={styles.buttonContainer}>
         <button onClick={handleShowAddPayee} style={styles.button}>Add Payee</button>
-        <button onClick={handleShowPayPayee} style={styles.button}>Pay Payee</button>
+        <button onClick={() => handleShowPayPayee()} style={styles.button}>Pay Payee</button>
       </div>
       {showAddPayee ? (
         <>
@@ -66,7 +56,7 @@ const PayeeList = () => {
         </>
       ) : showPayPayee ? (
         <>
-          <PayPayee payees={payees} onPayment={handlePayment} />
+          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee} />
           <button onClick={handleBack} style={styles.button}>Back</button>
         </>
       ) : (
@@ -74,7 +64,7 @@ const PayeeList = () => {
           <h3 style={styles.balance}>Balance: ${balance}</h3>
           <h2 style={styles.header}>Recent Payees</h2>
           {recentPayees.map((payee, index) => (
-            <div key={index} style={styles.payeeCard} onClick={handleShowPayPayee}>
+            <div key={index} style={styles.payeeCard} onClick={() => handleShowPayPayee(payee.name)}>
               <h3 style={styles.payeeName}>{payee.name}</h3>
               <p style={styles.payeeAccount}>{payee.account}</p>
             </div>
