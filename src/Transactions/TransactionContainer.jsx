@@ -1,7 +1,7 @@
 import React from 'react'
 import TransactionItem from './TransactionItem'
 
-function History() {
+function TransactionContainer() {
     return (
         <section className='tw-mx-6 tw-p-4 tw-shadow-md'>
             <div className='tw-grid tw-grid-cols-12'>
@@ -20,4 +20,4 @@ function History() {
     )
 }
 
-export default History
+export default TransactionContainer
