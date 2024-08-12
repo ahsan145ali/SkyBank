@@ -5,15 +5,21 @@ import './Login.css';
 import { useState } from 'react';
 import skylogo from '../UI/sky_logo.png';
 import CustomerModel from '../Components/Utils/Customer.model';
+import { useNavigate } from "react-router-dom"
 import 'devextreme/dist/css/dx.light.css';
 import {Popup} from 'devextreme-react/popup'; 
 import {useAuth} from '../Context/AuthContext';
+import { useUserContext } from '../Context/UserContext';
 import { Link } from 'react-router-dom';
+
 const Login = () => {
     
     const baseCustomerUrl = "http://localhost:8081/customer";
     const token = process.env.JWT_TOKEN; // get it from .env.local file
     const {storeContextToken} = useAuth();
+    const {storeUserDetails} = useUserContext();
+    const {userDetails} = useUserContext();
+    const navigate = useNavigate()
 
     //States
     const [isSignUp, setIsSignUp] = useState(false);
@@ -83,6 +89,7 @@ const Login = () => {
   /// Database Functions
   const SendUserToDatabase = async()=>{ 
     //customer.customerPassword = getPasswordHash(customer.customerPassword); 
+    
    await axios.post(baseCustomerUrl +"/create",customer).then((res)=>{
      console.log("Posted to database" , res);
      window.alert("SignUp Success");
@@ -120,15 +127,16 @@ const Login = () => {
       "loginPassword":customerPassword
     }
     await axios.post(baseCustomerUrl + "/login",loginRequest).then((res)=>{
-
       console.log(res);
+      storeUserDetails(res.data);
+      navigate("/Payeelist");
     }).catch((error)=>{
       window.alert(error);
       console.log("Error: " , error);
     })
   }
   useEffect(()=>{
-    const getToken = sessionStorage.getItem("sessionToken");
+   
    
   },[])
   //Database Functions End

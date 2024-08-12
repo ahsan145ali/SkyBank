@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const PayPayee = ({ onPayment, payees, selectedPayee }) => {
+const PayPayee = ({ onPayment, payees, selectedPayee}) => {
   const [payee, setPayee] = useState('');
   const [amount, setAmount] = useState('');
   const [reference, setReference] = useState('');  // New state for reference
-
   useEffect(() => {
     if (selectedPayee) {
       setPayee(selectedPayee);
