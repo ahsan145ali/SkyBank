@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const PayPayee = ({ onPayment, payees, selectedPayee }) => {
   const [payee, setPayee] = useState('');
   const [amount, setAmount] = useState('');
+  const [reference, setReference] = useState('');  // New state for reference
 
   useEffect(() => {
     if (selectedPayee) {
@@ -13,10 +14,11 @@ const PayPayee = ({ onPayment, payees, selectedPayee }) => {
   const handlePay = (e) => {
     e.preventDefault();
     if (payee && amount) {
-      onPayment(parseFloat(amount), payee);
-      alert(`Payment of $${amount} to ${payee} successful`);
+      onPayment(parseFloat(amount), payee, reference);  // Pass the reference to onPayment
+      alert(`Payment of $${amount} to ${payee} successful. Reference: ${reference}`);
       setPayee('');
       setAmount('');
+      setReference('');  // Clear reference field after payment
     }
   };
 
@@ -42,6 +44,13 @@ const PayPayee = ({ onPayment, payees, selectedPayee }) => {
           onChange={(e) => setAmount(e.target.value)}
           style={styles.input}
           required
+        />
+        <input
+          type="text"
+          placeholder="Reference"
+          value={reference}
+          onChange={(e) => setReference(e.target.value)}
+          style={styles.input}
         />
         <button type="submit" style={styles.button}>Pay</button>
       </form>

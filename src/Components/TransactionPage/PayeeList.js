@@ -10,29 +10,39 @@ const PayeeList = () => {
   const [selectedPayee, setSelectedPayee] = useState(null);
   const [balance, setBalance] = useState(5000);
 
+  // Function to add a new payee
   const addPayee = (payee) => {
     setPayees([...payees, payee]);
     setShowAddPayee(false);
   };
 
-  const handlePayment = (amount, payeeName) => {
-    setBalance(balance - amount); 
-    const payee = payees.find(p => p.name === payeeName); // Find the payee
+  // Function to delete a payee
+  const deletePayee = (payeeName) => {
+    const filteredPayees = payees.filter(payee => payee.name !== payeeName);
+    setPayees(filteredPayees);
+    setRecentPayees(recentPayees.filter(p => p.name !== payeeName));
+  };
+
+  // Function to handle a payment
+  const handlePayment = (amount, payeeName, reference) => {
+    setBalance(balance - amount);
+    const payee = payees.find(p => p.name === payeeName);
     if (payee) {
-      setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]); // Update recent payees
+      setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]);
     }
+    console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
     setShowPayPayee(false);
   };
 
-
+  // Function to show the Add Payee form
   const handleShowAddPayee = () => {
     setShowAddPayee(true);
     setShowPayPayee(false);
   };
 
-
+  // Function to show the Pay Payee form
   const handleShowPayPayee = (payeeName = null) => {
-    setSelectedPayee(payeeName); // Set the selected payee
+    setSelectedPayee(payeeName);
     setShowPayPayee(true);
     setShowAddPayee(false);
   };
@@ -64,9 +74,14 @@ const PayeeList = () => {
           <h3 style={styles.balance}>Balance: ${balance}</h3>
           <h2 style={styles.header}>Recent Payees</h2>
           {recentPayees.map((payee, index) => (
-            <div key={index} style={styles.payeeCard} onClick={() => handleShowPayPayee(payee.name)}>
+            <div key={index} style={styles.payeeCard}>
               <h3 style={styles.payeeName}>{payee.name}</h3>
-              <p style={styles.payeeAccount}>{payee.account}</p>
+              <p style={styles.payeeAccount}>Sort Code: {payee.sortCode}</p>
+              <p style={styles.payeeAccount}>Account Number: {payee.accountNumber}</p>
+              <div style={styles.cardButtons}>
+                <button onClick={() => handleShowPayPayee(payee.name)} style={styles.payButton}>Pay</button>
+                <button onClick={() => deletePayee(payee.name)} style={styles.deleteButton}>Delete</button>
+              </div>
             </div>
           ))}
         </>
@@ -114,6 +129,11 @@ const styles = {
     fontSize: '16px',
     color: '#555',
   },
+  cardButtons: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginTop: '10px',
+  },
   buttonContainer: {
     display: 'flex',
     justifyContent: 'center',
@@ -126,6 +146,22 @@ const styles = {
     border: 'none',
     color: 'white',
     cursor: 'pointer',
+  },
+  payButton: {
+    padding: '5px 10px',
+    backgroundColor: '#28a745',
+    border: 'none',
+    color: 'white',
+    cursor: 'pointer',
+    borderRadius: '5px',
+  },
+  deleteButton: {
+    padding: '5px 10px',
+    backgroundColor: '#ff4d4d',
+    border: 'none',
+    color: 'white',
+    cursor: 'pointer',
+    borderRadius: '5px',
   },
 };
 

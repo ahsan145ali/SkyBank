@@ -2,13 +2,23 @@ import React, { useState } from 'react';
 
 const AddPayee = ({ onAddPayee }) => {
   const [name, setName] = useState('');
-  const [account, setAccount] = useState('');
+  const [sortCode, setSortCode] = useState('');
+  const [accountNumber, setAccountNumber] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddPayee({ name, account });
+
+    if (accountNumber.length !== 8) {
+      setError('Incorrect account number. It must be 8 digits long.');
+      return;
+    }
+
+    onAddPayee({ name, sortCode, accountNumber });
     setName('');
-    setAccount('');
+    setSortCode('');
+    setAccountNumber('');
+    setError('');
     alert('Payee added successfully');
   };
 
@@ -27,11 +37,20 @@ const AddPayee = ({ onAddPayee }) => {
         <input
           type="text"
           placeholder="Sort Code"
-          value={account}
-          onChange={(e) => setAccount(e.target.value)}
+          value={sortCode}
+          onChange={(e) => setSortCode(e.target.value)}
           style={styles.input}
           required
         />
+        <input
+          type="text"
+          placeholder="Account Number"
+          value={accountNumber}
+          onChange={(e) => setAccountNumber(e.target.value)}
+          style={styles.input}
+          required
+        />
+        {error && <p style={styles.error}>{error}</p>}
         <button type="submit" style={styles.button}>Add</button>
       </form>
     </div>
@@ -53,6 +72,10 @@ const styles = {
     padding: '10px',
     width: '80%',
     maxWidth: '300px',
+  },
+  error: {
+    color: 'red',
+    marginTop: '10px',
   },
   button: {
     padding: '10px 20px',
