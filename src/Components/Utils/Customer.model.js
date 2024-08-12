@@ -1,8 +1,13 @@
 export default class CustomerModel {
-    constructor(customerName, customerEmail, customerPassword) {
-      this.customerName = customerName;
-      this.customerEmail = customerEmail;
-      this.customerPassword = customerPassword;
+    constructor(firstName, lastName, email, password, sortCode , accountNumber , balance) {
+      this.firstName = firstName; 
+      this.lastName = lastName;
+      this.email = email;
+      this.password = password;
+      this.sortCode = sortCode;
+      this.accountNumber = accountNumber;
+      this.balance = balance;
+
     }
   }
   
