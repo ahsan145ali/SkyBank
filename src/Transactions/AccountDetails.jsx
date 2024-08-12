@@ -1,14 +1,39 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BankCard from './card.jpeg'
 import { useNavigate } from "react-router-dom"
+import { useUserContext } from '../Context/UserContext';
+import axios from 'axios';
 
 
-function AccountDetails({ balance }) {
+function AccountDetails() {
     const navigate = useNavigate()
-
+    // const [customerDetails, setCustomerDetails] = useState(null);
+    // const [isLoading, setIsLoading] = useState(true);
+    const {userDetails} = useUserContext();
     const goToPayee=()=>{
         navigate("/PayeeList");
     }
+
+    // useEffect(() => {
+    //     async function getCustomerDetails(){
+    //         await axios.get(`http://localhost:8081/customer/get/email/${email}`)
+    //         .then(({data}) => {
+    //             setCustomerDetails({
+    //                 accountNumber: data.accountNumber, 
+    //                 sortCode: data.sortCode,
+    //                 balance: data.balance,
+    //                 cardName: `${data.firstName}'s Card`
+    //             })
+    //             setTimeout(setIsLoading(false), 10000)
+                
+    //         }).catch(error => {
+    //             //If wrong endpoint then take to homepage
+    //             if(error) navigate("/homepage")
+    //         })
+    //     }
+    //     getCustomerDetails()
+    // },[])
+
 
     return (
         <section className='tw-flex tw-flex-col tw-mx-6 tw-p-4 tw-shadow-md'>
@@ -17,15 +42,16 @@ function AccountDetails({ balance }) {
                     <div className='md:tw-grid md:tw-col-span-6'>
                         <img src={BankCard} className='tw-hidden md:tw-block tw-row-start-1 tw-row-span-2' />
                         <div className='tw-hidden md:tw-flex md:tw-flex-col md:tw-col-start-2 md:tw-gap-2 md:tw-justify-center'>
-                            <p className=''>Alans Debit Card</p>
-                            <p className=''>12-34-45</p>
-                            <p className=''>6789101112</p>
+                            <p className=''>{userDetails.cardName}</p>
+                            <p className=''>{userDetails.sortCode}</p>
+                            <p className=''>{userDetails.accountNumber}</p>
                         </div>
                         <div className='md:tw-row-start-2'>
                             <p>Available Balance: </p>
-                            <p>£{balance}</p>
+                            <p>£{userDetails.balance}</p>
                         </div>
                     </div>
+  
                     <div className='md:tw-row-start-4 md:tw-col-start-4 md:tw-col-span-3 md:tw-flex md:tw-gap-2'>
                         <button className='tw-bg-blue-700 tw-text-white md:tw-min-w-48 tw-p-2 tw-rounded-lg tw-self-center' onClick={() => goToPayee()}>Make a Payment</button>
                     </div>
