@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import AddPayee from './AddPayee';
 import PayPayee from './PayPayee';
-
+import { useUserContext } from '../../Context/UserContext';
+import axios from 'axios';
 const PayeeList = () => {
   const [payees, setPayees] = useState([]);
   const [recentPayees, setRecentPayees] = useState([]);
@@ -9,7 +10,19 @@ const PayeeList = () => {
   const [showPayPayee, setShowPayPayee] = useState(false);
   const [selectedPayee, setSelectedPayee] = useState(null);
   const [balance, setBalance] = useState(5000);
+  const baseCustomerUrl = "http://localhost:8081/transaction";
+  let currentDate = new Date();
+  const {userDetails} = useUserContext();
 
+  let TransactionDetails ={
+    "description": "",
+    "transactionDate":"" ,
+    "amountIn":0,
+    "amountOut":"",
+    "payeeAccountNumber":"",
+    "payeeSortCode":"",
+    "customerEmail": userDetails.email
+  }
   // Function to add a new payee
   const addPayee = (payee) => {
     setPayees([...payees, payee]);
@@ -30,10 +43,24 @@ const PayeeList = () => {
     if (payee) {
       setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]);
     }
+    TransactionDetails["description"] = reference;
+    TransactionDetails["amountOut"] = Number(amount);
+    TransactionDetails["payeeAccountNumber"]= payee["accountNumber"];
+    TransactionDetails["payeeSortCode"]= payee["sortCode"];
+    TransactionDetails["transactionDate"] = currentDate;
+
     console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
+    sendTransactionToDatabase();
     setShowPayPayee(false);
   };
-
+ const sendTransactionToDatabase = async ()=>{
+  await axios.post(baseCustomerUrl +"/create",TransactionDetails).then((res)=>{
+    console.log(res)
+  }).catch((e)=>{
+    window.alert(e);
+    console.log("Error: ",e );
+  })
+ }
   // Function to show the Add Payee form
   const handleShowAddPayee = () => {
     setShowAddPayee(true);
@@ -66,7 +93,7 @@ const PayeeList = () => {
         </>
       ) : showPayPayee ? (
         <>
-          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee} />
+          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee}/>
           <button onClick={handleBack} style={styles.button}>Back</button>
         </>
       ) : (

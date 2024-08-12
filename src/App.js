@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './Context/AuthContext';
+import { AuthProvider} from './Context/AuthContext';
+import {UserProvider} from './Context/UserContext.js'; 
 import PayeeList from './Components/TransactionPage/PayeeList';
 import Navbar from './Navbar/Navbar.js';
 import Dashboard from './Dashboard/Dashboard.jsx';
@@ -16,6 +17,7 @@ function App() {
     <Router>
       <Navbar />
       <AuthProvider>
+        <UserProvider>
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/homepage' element={<Homepage />} />
@@ -27,7 +29,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
-
+        </UserProvider>
       </AuthProvider>
     </Router>
 
