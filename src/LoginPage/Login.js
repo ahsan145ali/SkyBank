@@ -11,13 +11,14 @@ import {useAuth} from '../Context/AuthContext';
 import { Link } from 'react-router-dom';
 const Login = () => {
     
-    const baseCustomerUrl = "http://localhost:4000/Customers";
+    const baseCustomerUrl = "http://localhost:8081/customer";
     const token = process.env.JWT_TOKEN; // get it from .env.local file
     const {storeContextToken} = useAuth();
 
     //States
     const [isSignUp, setIsSignUp] = useState(false);
-    const [customerName,setCustomerName] = useState('');
+    const [customerFirstName,setCustomerFirstName] = useState('');
+    const [customerlastName,setCustomerLastName] = useState('');
     const [customerPassword,setCustomerPassword] = useState('');
     const [customerEmail,setCustomerEmail] = useState('');
     const [isPopupvisible,setPopupVisible] = useState(false);
@@ -48,21 +49,25 @@ const Login = () => {
 
   const setStatesToDefault = ()=>{
     setCustomerEmail('');
-    setCustomerName('');
+    setCustomerFirstName('');
+    setCustomerLastName('');
     setCustomerPassword('');
   }
 
 
   const handleSubmitSignUp =  (event) => {
     event.preventDefault();
-    customer = new CustomerModel(customerName,customerEmail, customerPassword);
+    customer = new CustomerModel(customerFirstName,customerlastName,customerEmail, customerPassword,123456,9876543,1000);
+    console.log(customer);
+    //SendUserToDatabase();
     CheckIfUserExists("SignUp");
-    togglePopup(); 
+    //togglePopup(); 
   };
 
   const handleSubmitSignIn =  (event) => {
     event.preventDefault();
-    CheckIfUserExists("SignIn");
+    //CheckIfUserExists("SignIn");
+    Login();
     //togglePopup(); 
   };
 
@@ -77,65 +82,51 @@ const Login = () => {
 
   /// Database Functions
   const SendUserToDatabase = async()=>{ 
-    customer.customerPassword = getPasswordHash(customer.customerPassword); 
-   await axios.post(baseCustomerUrl,customer).then((res)=>{
-     console.log("Posted to database");
-     setContent("SignUp Success");
-     setTitle("Success");
+    //customer.customerPassword = getPasswordHash(customer.customerPassword); 
+   await axios.post(baseCustomerUrl +"/create",customer).then((res)=>{
+     console.log("Posted to database" , res);
+     window.alert("SignUp Success");
    }).catch((e)=>{
      console.log(`There was a problem adding: ${e.message}`);
-     setContent("SignUp Failed " + e.message);
-     setTitle("Error");
+     window.alert("SignUp Failed " + e.message);
    })
  }
   
   const CheckIfUserExists = async(action)=>{
-    await axios.get(baseCustomerUrl +"?customerEmail="+customerEmail).then((res)=>{
+    await axios.get(baseCustomerUrl + "/get/email/"+customerEmail).then((res)=>{
+      console.log("Result: " , res);
       if(res.data.length != 0){ //  User exists , do not send to database
         if(action == "SignUp"){
-        setTitle("OOPS...");
-        setContent("This email is already used by another user , try signing in");}
-        else{
-            //Checking if password match
-            const hashPass = getPasswordHash(customerPassword);
-            if(hashPass == res.data[0].customerPassword){
-              console.log("Password Match");
-              setPopupVisible(false);
-              //Creating and storing JWT in cookies
-              const sessionToken = sha256(res.data[0].customerEmail + token);
-              sessionStorage.setItem("sessionToken" , sessionToken)
-              storeContextToken(sessionToken);
-
-              console.log("token: " , sessionToken);
-           
-              // Navigate to page after Login
-            }else{
-              setTitle("OOPS...");
-              setContent("Incorrect Password , Try Again");
-              togglePopup();
-      
-            }
-        }
-      }else{ //  User does not exists, send to database
-        if(action == "SignUp")    
-          SendUserToDatabase();
-        else{
-          setTitle("OOPS...");
-          setContent("Email not recognized, try creating an account");
-          togglePopup();
-        }
+          window.alert("This email is already used by another user , try signing in");
       }
-    }).catch((e)=>{
-      setTitle("Error");
-      setContent(e.message);
+      }
+    }).catch((error)=>{
+      if(error.response.data.status == 404){
+        if(action == "SignUp"){    
+          SendUserToDatabase();
+        }
+      }else{
+        console.log("Error: " , error);
+        window.alert(error);
+      }
 
     })
   }
 
-  const getPasswordHash = (password)=>{
-    return sha256(password);
+
+  const Login = async ()=>{
+    const loginRequest = {
+      "loginEmail": customerEmail,
+      "loginPassword":customerPassword
+    }
+    await axios.post(baseCustomerUrl + "/login",loginRequest).then((res)=>{
+
+      console.log(res);
+    }).catch((error)=>{
+      window.alert(error);
+      console.log("Error: " , error);
+    })
   }
-  
   useEffect(()=>{
     const getToken = sessionStorage.getItem("sessionToken");
    
@@ -149,19 +140,11 @@ const Login = () => {
             <form onSubmit={handleSubmitSignUp} >
                 <h1>Create Account</h1>
                 <span>use your email for registration</span>
-                <input type="text" placeholder="Name" value = {customerName} onChange={event=>setCustomerName(event.target.value)} required/>
+                <input type="text" placeholder="First Name" value = {customerFirstName} onChange={event=>setCustomerFirstName(event.target.value)} required/>
+                <input type="text" placeholder="Last Name" value = {customerlastName} onChange={event=>setCustomerLastName(event.target.value)} required/>
                 <input type="email" placeholder="Email" value = {customerEmail} onChange={event=>setCustomerEmail(event.target.value)} required/>
                 <input type="password" placeholder="Password" value={customerPassword} onChange={event=>setCustomerPassword(event.target.value)} required/>
                 <button>Sign Up</button>
-                <Popup contentRender={renderContent}
-                    visible={isPopupvisible}
-                    hideOnOutsideClick={true}
-                    onHiding={togglePopup}
-                    showTitle={true}
-                    title={title}
-                    defaultWidth={700}
-                    defaultHeight={150}
-                 />
             </form>
         </div>
         <div class="form-container sign-in">
@@ -172,15 +155,6 @@ const Login = () => {
                 <input type="password" placeholder="Password" value = {customerPassword} onChange={event=>setCustomerPassword(event.target.value)} required/>
                 <a href="#">Forgot your password?</a>
                 <button>Sign In</button>
-                <Popup contentRender={renderContent}
-                    visible={isPopupvisible}
-                    hideOnOutsideClick={true}
-                    onHiding={togglePopup}
-                    showTitle={true}
-                    title={title}
-                    defaultWidth={700}
-                    defaultHeight={150}
-                 />
             </form>
         </div>
         <div class="toggle-container">
