@@ -5,7 +5,7 @@ const UserContext = createContext(null);
 
 // Create a provider component
 export const UserProvider = ({ children }) => {
-  const [userDetails, setUserDetails] = useState({});
+  const [userDetails, setUserDetails] = useState(null);
 
   const storeUserDetails = (loggedInUser) => {
     setUserDetails(loggedInUser);
