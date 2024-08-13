@@ -129,7 +129,7 @@ const Login = () => {
     await axios.post(baseCustomerUrl + "/login",loginRequest).then((res)=>{
       console.log(res);
       storeUserDetails(res.data);
-      navigate("/Payeelist");
+      navigate("/dashboard");
     }).catch((error)=>{
       window.alert(error);
       console.log("Error: " , error);
