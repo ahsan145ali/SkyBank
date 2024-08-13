@@ -28,7 +28,9 @@ function AccountDetails() {
                 
             }).catch(error => {
                 //If wrong endpoint then take to homepage
-                if(error) navigate("/homepage")
+                // if(error) navigate("/homepage")
+                alert(`Trying to access invalid end point: http://localhost:8081/customer/get/email/${userDetails.email}. See logs`)
+                console.log("Account details catch error: " + error);
             })
         }
         getCustomerDetails()
