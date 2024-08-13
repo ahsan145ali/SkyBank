@@ -41,12 +41,7 @@ const PayeeList = () => {
 
   // Function to add a new payee
   const addPayee = (payee) => {
-<<<<<<< HEAD
     // setPayees([...payees, payee]);
-=======
-    setPayees([...payees, payee]);
-    console.log(payee);
->>>>>>> 6f44dd3bd56e3223b5665ef0614f143e374b599d
     setShowAddPayee(false);
     PayeeDetails.firstName = payee.name;
     PayeeDetails.lastName = payee.name;
@@ -67,22 +62,23 @@ const PayeeList = () => {
     }
 
     fetchPayees();
+    console.log(`Payees: ` + payees[0].firstName);
 };
 
   // Function to delete a payee
   const deletePayee = (payeeName) => {
-    const filteredPayees = payees.filter(payee => payee.name !== payeeName);
+    const filteredPayees = payees.filter(payee => payee.firstName !== payeeName);
     setPayees(filteredPayees);
-    setRecentPayees(recentPayees.filter(p => p.name !== payeeName));
+    setRecentPayees(recentPayees.filter(p => p.firstName !== payeeName));
   };
 
   // Function to handle a payment
   const handlePayment = (amount, payeeName, reference) => {
     setBalance(balance - amount);
     userDetails.balance = balance;
-    const payee = payees.find(p => p.name === payeeName);
+    const payee = payees.find(p => p.firstName === payeeName);
     if (payee) {
-      setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]);
+      setRecentPayees([payee, ...recentPayees.filter(p => p.firstName !== payeeName)]);
     }
     TransactionDetails["description"] = reference;
     TransactionDetails["amountOut"] = Number(amount);
@@ -147,12 +143,12 @@ const PayeeList = () => {
           <h2 style={styles.header}>Recent Payees</h2>
           {recentPayees.map((payee, index) => (
             <div key={index} style={styles.payeeCard}>
-              <h3 style={styles.payeeName}>{payee.name}</h3>
+              <h3 style={styles.payeeName}>{payee.firstName}</h3>
               <p style={styles.payeeAccount}>Sort Code: {payee.sortCode}</p>
               <p style={styles.payeeAccount}>Account Number: {payee.accountNumber}</p>
               <div style={styles.cardButtons}>
-                <button onClick={() => handleShowPayPayee(payee.name)} style={styles.payButton}>Pay</button>
-                <button onClick={() => deletePayee(payee.name)} style={styles.deleteButton}>Delete</button>
+                <button onClick={() => handleShowPayPayee(payee.firstName)} style={styles.payButton}>Pay</button>
+                <button onClick={() => deletePayee(payee.firstName)} style={styles.deleteButton}>Delete</button>
               </div>
             </div>
           ))}

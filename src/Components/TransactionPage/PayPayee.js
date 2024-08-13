@@ -34,7 +34,7 @@ const PayPayee = ({ onPayment, payees, selectedPayee}) => {
         >
           <option value="">Select Payee</option>
           {payees.map((payee, index) => (
-            <option key={index} value={payee.name}>{payee.name}</option>
+            <option key={index} value={payee.firstName}>{payee.firstName}</option>
           ))}
         </select>
         <input
