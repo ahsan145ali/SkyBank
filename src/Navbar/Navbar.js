@@ -53,7 +53,7 @@ const Navbar = () => {
                                 <li className='tw-my-2'><Link to="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</Link></li>
                                 <li className='tw-my-2'><Link to="/transactions" onClick={() => setIsOpen(false)}>Transactions</Link></li>
                                 <li className='tw-my-2'><Link to="/PayeeList" onClick={() => setIsOpen(false)}>Pay a contact</Link></li>
-                                <li className='tw-my-2'><Link to="/" onClick={() => setIsOpen(false)}>Logout</Link></li>
+                                <li className='tw-my-2'><Link to="/logout" onClick={() => setIsOpen(false)}>Logout</Link></li>
                             </ul>
                         </div>
                     </div>
