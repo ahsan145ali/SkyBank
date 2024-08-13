@@ -16,7 +16,7 @@ function AccountDetails() {
 
     useEffect(() => {
         async function getCustomerDetails(){
-            await axios.get(`http://localhost:8081/customer/get/email/${userDetails.email}`)
+            await axios.get(`http://localhost:8081/customer/get/email/${userDetails}`,{withCredentials:true})
             .then(({data}) => {
                 setCustomerDetails({
                     accountNumber: data.accountNumber, 
@@ -29,7 +29,7 @@ function AccountDetails() {
             }).catch(error => {
                 //If wrong endpoint then take to homepage
                 // if(error) navigate("/homepage")
-                alert(`Trying to access invalid end point: http://localhost:8081/customer/get/email/${userDetails.email}. See logs`)
+                alert(`Trying to access invalid end point: http://localhost:8081/customer/get/email/${userDetails}. See logs`)
                 console.log("Account details catch error: " + error);
             })
         }
