@@ -63,7 +63,7 @@ const Login = () => {
 
   const handleSubmitSignUp =  (event) => {
     event.preventDefault();
-    customer = new CustomerModel(customerFirstName,customerlastName,customerEmail, customerPassword,123456,9876543,1000);
+    customer = new CustomerModel(customerFirstName,customerlastName,customerEmail, customerPassword);
     console.log(customer);
     //SendUserToDatabase();
     CheckIfUserExists("SignUp");
