@@ -127,24 +127,31 @@ const Login = () => {
       headers: {
         "Content-Type": 'multipart/form-data'
       }, withCredentials: true
-    }).then((res) => {
-      console.log(res);
-      storeUserDetails(res.data);
-      navigate("/dashboard");
+    })
+    .then(() => {
+      getLoggedInUser()
+      // navigate("/dashboard");
     }).catch((error)=>{
       window.alert(error);
       console.log("Error: ", error);
     })
   }
+
+  const getLoggedInUser = async () => {
+    let {data} = await axios.get("http://localhost:8081/customer/user",{withCredentials: true})
+    storeUserDetails(data)
+    navigate("/dashboard");
+    // console.log(loggedIn);
+  }
   
   //Database Functions End
-  useEffect(()=>{
-    console.log("UserDetails: " , userDetails)
-    if(Object.keys(userDetails).length !=0){
-      navigate("/dashboard");
-    }
+  // useEffect(()=>{
+  //   console.log("UserDetails: " , userDetails)
+  //   if(Object.keys(userDetails).length !=0){
+  //     navigate("/dashboard");
+  //   }
    
-  },[])
+  // },[])
   return (
     <>
       <div className="MainContainer">
