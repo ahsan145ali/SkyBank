@@ -11,6 +11,7 @@ const PayeeList = () => {
   const [selectedPayee, setSelectedPayee] = useState(null);
   const [balance, setBalance] = useState(5000);
   const baseCustomerUrl = "http://localhost:8081/transaction";
+  const basePayeeUrl = "http://localhost:8081/payee";
   let currentDate = new Date();
   const {userDetails} = useUserContext();
 
@@ -23,11 +24,36 @@ const PayeeList = () => {
     "payeeSortCode":"",
     "customerEmail": userDetails.email
   }
+    // Payee details structure
+    const PayeeDetails = {
+      firstName: "",
+      lastName: "",
+      sortCode: "",
+      accountNumber: "",
+      customerEmail: userDetails.email, 
+  };
+
   // Function to add a new payee
   const addPayee = (payee) => {
     setPayees([...payees, payee]);
     setShowAddPayee(false);
+    PayeeDetails.firstName = payee.name;
+    PayeeDetails.lastName = payee.name;
+    PayeeDetails.sortCode = payee.sortCode;
+    PayeeDetails.accountNumber = payee.accountNumber;
+    sendPayeeToDatabase();
   };
+
+   // Function to send payee details to the backend
+   const sendPayeeToDatabase = async () => {
+    try {
+        const response = await axios.post(basePayeeUrl + "/create", PayeeDetails);
+        console.log(response);
+    } catch (e) {
+        window.alert(e);
+        console.log("Error: ", e);
+    }
+};
 
   // Function to delete a payee
   const deletePayee = (payeeName) => {
