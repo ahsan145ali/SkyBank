@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Dashboard.css';
 import logo from '../Transactions/sky-logo.png'
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from '../Context/UserContext';
+import axios from 'axios';
 
 const Dashboard = () => {
-    const {userDetails} = useUserContext();
     const navigate = useNavigate()
-
+    const {userDetails} = useUserContext();
+    const [balance, setBalance] = useState(null);
+    const [isLoading, setIsLoading] = useState(true)
     const goToTransactions=()=>{
         navigate("/transactions");
     }
@@ -15,6 +17,16 @@ const Dashboard = () => {
     const goToPayeeList=()=>{
         navigate("/Payeelist");
     }
+
+    useEffect(() => {
+        const getBalance = async () => {
+            console.log(userDetails);
+            const request = await axios.get(`http://localhost:8081/customer/get/email/${userDetails}`,{withCredentials: true})
+            setBalance(request.data.balance);
+            setIsLoading(false)
+        }
+        getBalance()
+    },[])
 
     return (
         <>
@@ -24,7 +36,7 @@ const Dashboard = () => {
                 <div className="content" >
                     <p className="heading">Balance
                         <span className="balance" >
-                           £{userDetails.balance}
+                           {isLoading ? "Loading..." : `£${balance}`}
                         </span>
                         </p>
 
