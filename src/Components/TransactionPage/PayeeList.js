@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AddPayee from './AddPayee';
 import PayPayee from './PayPayee';
 import { useUserContext } from '../../Context/UserContext';
@@ -19,7 +19,6 @@ const PayeeList = () => {
     const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email);
     setPayees(response.data);
    } 
-  
 
   let TransactionDetails ={
     "description": "",
@@ -41,12 +40,13 @@ const PayeeList = () => {
 
   // Function to add a new payee
   const addPayee = (payee) => {
-    setPayees([...payees, payee]);
+    // setPayees([...payees, payee]);
     setShowAddPayee(false);
     PayeeDetails.firstName = payee.name;
     PayeeDetails.lastName = payee.name;
     PayeeDetails.sortCode = payee.sortCode;
     PayeeDetails.accountNumber = payee.accountNumber;
+    console.log(PayeeDetails);
     sendPayeeToDatabase();
   };
 
@@ -59,6 +59,8 @@ const PayeeList = () => {
         window.alert(e);
         console.log("Error: ", e);
     }
+
+    fetchPayees();
 };
 
   // Function to delete a payee
@@ -97,7 +99,6 @@ const PayeeList = () => {
   const handleShowAddPayee = () => {
     setShowAddPayee(true);
     setShowPayPayee(false);
-    fetchPayees();
   };
 
   // Function to show the Pay Payee form
@@ -112,6 +113,10 @@ const PayeeList = () => {
     setShowAddPayee(false);
     setShowPayPayee(false);
   };
+
+  useEffect(() => {
+    fetchPayees();
+  }, []);
 
   return (
     <div style={styles.container}>
