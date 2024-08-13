@@ -26,6 +26,7 @@ const PayeeList = () => {
   // Function to add a new payee
   const addPayee = (payee) => {
     setPayees([...payees, payee]);
+    console.log(payee);
     setShowAddPayee(false);
   };
 
