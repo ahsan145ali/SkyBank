@@ -94,6 +94,7 @@ const PayeeList = () => {
     setShowPayPayee(false);
     updateBalance();
   };
+  
  const sendTransactionToDatabase = async ()=>{
   await axios.post(baseCustomerUrl +"/create",TransactionDetails).then((res)=>{
     console.log(res)
@@ -125,9 +126,9 @@ const PayeeList = () => {
     fetchPayees();
   }, []);
 
-  useEffect(() => {
-    updateBalance();
-  }, []);
+  // useEffect(() => {
+  //   updateBalance();
+  // }, []);
 
   return (
     <div style={styles.container}>
