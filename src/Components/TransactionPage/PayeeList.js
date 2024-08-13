@@ -21,11 +21,16 @@ const PayeeList = () => {
     setPayees(response.data);
    } 
 
+   const updateBalance = async () => {
+    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email);
+    setBalance(response.data.balance);
+   } 
+
   let TransactionDetails ={
     "description": "",
     "transactionDate":"" ,
-    "amountIn":0,
-    "amountOut":"",
+    "amountIn": null,
+    "amountOut": null,
     "payeeAccountNumber":"",
     "payeeSortCode":"",
     "customerEmail": userDetails.email
@@ -74,8 +79,6 @@ const PayeeList = () => {
 
   // Function to handle a payment
   const handlePayment = (amount, payeeName, reference) => {
-    setBalance(balance - amount);
-    userDetails.balance = balance;
     const payee = payees.find(p => p.firstName === payeeName);
     if (payee) {
       setRecentPayees([payee, ...recentPayees.filter(p => p.firstName !== payeeName)]);
@@ -89,7 +92,9 @@ const PayeeList = () => {
     console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
     sendTransactionToDatabase();
     setShowPayPayee(false);
+    updateBalance();
   };
+  
  const sendTransactionToDatabase = async ()=>{
   await axios.post(baseCustomerUrl +"/create",TransactionDetails).then((res)=>{
     console.log(res)
@@ -120,6 +125,10 @@ const PayeeList = () => {
   useEffect(() => {
     fetchPayees();
   }, []);
+
+  // useEffect(() => {
+  //   updateBalance();
+  // }, []);
 
   return (
     <div style={styles.container}>
