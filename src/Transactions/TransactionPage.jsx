@@ -6,7 +6,7 @@ function TransactionPage() {
 
   return (
       <div className='tw-container tw-min-w-96 md:tw-w-[90%] tw-m-auto'>
-        <AccountDetails balance={"2000.00"}/>
+        <AccountDetails/>
         <TransactionContainer />
       </div>
   )

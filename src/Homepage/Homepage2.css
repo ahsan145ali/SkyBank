@@ -1,0 +1,210 @@
+/* Basic Reset */
+
+
+.bodyContainer {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px;
+    background: #f9f9f9;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    padding: 10px 20px;
+    background: #31d35c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: #354fb7;
+}
+
+.hero-image img {
+    max-width: 500px;
+}
+
+/* Why Choose Easybank Section */
+.why-choose {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.why-choose h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.why-choose p {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.feature-item {
+    max-width: 250px;
+    margin-bottom: 20px;
+}
+
+.feature-item img {
+    margin-bottom: 15px;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+/* Latest Articles Section */
+.latest-articles {
+    background: #f3f4f6;
+    padding: 50px 20px;
+}
+
+.latest-articles h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.articles {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.article-item {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
+
+.article-item img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.article-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+/* Footer Section */
+footer {
+    background-color: #2d314d;
+    padding: 40px 0;
+    color: white;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-logo {
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    margin-right: 15px;
+}
+
+.social-icons img {
+    width: 24px;
+}
+
+.footer-middle {
+    display: flex;
+    justify-content: space-between;
+    width: 300px;
+    text-align: left;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle ul li {
+    margin-bottom: 10px;
+}
+
+.footer-middle ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-middle ul li a:hover {
+    color: #31d35c;
+}
+
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.cta-button {
+    padding: 10px 30px;
+        background: linear-gradient(90deg, rgba(255, 140, 0, 0.85) 0%, rgba(248, 0, 50, 0.85) 31%, rgba(255, 0, 160, 0.85) 54%, rgba(140, 40, 255, 0.85) 69%, rgba(0, 35, 255, 0.85) 86%);
+
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.cta-button:hover {
+    opacity: 0.8;
+}
+
+footer p {
+    margin: 0;
+}

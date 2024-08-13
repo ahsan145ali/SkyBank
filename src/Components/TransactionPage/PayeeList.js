@@ -4,16 +4,17 @@ import PayPayee from './PayPayee';
 import { useUserContext } from '../../Context/UserContext';
 import axios from 'axios';
 const PayeeList = () => {
+  const {userDetails} = useUserContext();
   const [payees, setPayees] = useState([]);
   const [recentPayees, setRecentPayees] = useState([]);
   const [showAddPayee, setShowAddPayee] = useState(false);
   const [showPayPayee, setShowPayPayee] = useState(false);
   const [selectedPayee, setSelectedPayee] = useState(null);
-  const [balance, setBalance] = useState(5000);
+  const [balance, setBalance] = useState(userDetails.balance);
   const baseCustomerUrl = "http://localhost:8081/transaction";
   const basePayeeUrl = "http://localhost:8081/payee";
   let currentDate = new Date();
-  const {userDetails} = useUserContext();
+ 
 
    const fetchPayees = async () => {
     const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email);
@@ -40,7 +41,12 @@ const PayeeList = () => {
 
   // Function to add a new payee
   const addPayee = (payee) => {
+<<<<<<< HEAD
     // setPayees([...payees, payee]);
+=======
+    setPayees([...payees, payee]);
+    console.log(payee);
+>>>>>>> 6f44dd3bd56e3223b5665ef0614f143e374b599d
     setShowAddPayee(false);
     PayeeDetails.firstName = payee.name;
     PayeeDetails.lastName = payee.name;
@@ -73,6 +79,7 @@ const PayeeList = () => {
   // Function to handle a payment
   const handlePayment = (amount, payeeName, reference) => {
     setBalance(balance - amount);
+    userDetails.balance = balance;
     const payee = payees.find(p => p.name === payeeName);
     if (payee) {
       setRecentPayees([payee, ...recentPayees.filter(p => p.name !== payeeName)]);

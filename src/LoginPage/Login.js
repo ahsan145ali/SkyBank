@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
-import {sha256} from 'js-sha256';
 import './Login.css';
 import { useState } from 'react';
-import skylogo from '../UI/sky_logo.png';
 import CustomerModel from '../Components/Utils/Customer.model';
 import { useNavigate } from "react-router-dom"
 import 'devextreme/dist/css/dx.light.css';
-import {Popup} from 'devextreme-react/popup'; 
 import {useAuth} from '../Context/AuthContext';
 import { useUserContext } from '../Context/UserContext';
-import { Link } from 'react-router-dom';
+
 
 const Login = () => {
     
@@ -63,7 +60,7 @@ const Login = () => {
 
   const handleSubmitSignUp =  (event) => {
     event.preventDefault();
-    customer = new CustomerModel(customerFirstName,customerlastName,customerEmail, customerPassword,123456,9876543,1000);
+    customer = new CustomerModel(customerFirstName,customerlastName,customerEmail, customerPassword);
     console.log(customer);
     //SendUserToDatabase();
     CheckIfUserExists("SignUp");
@@ -129,17 +126,21 @@ const Login = () => {
     await axios.post(baseCustomerUrl + "/login",loginRequest).then((res)=>{
       console.log(res);
       storeUserDetails(res.data);
-      navigate("/Payeelist");
+      navigate("/dashboard");
     }).catch((error)=>{
       window.alert(error);
       console.log("Error: " , error);
     })
   }
+  
+  //Database Functions End
   useEffect(()=>{
-   
+    console.log("UserDetails: " , userDetails)
+    if(Object.keys(userDetails).length !=0){
+      navigate("/dashboard");
+    }
    
   },[])
-  //Database Functions End
   return (
     <>
     <div className="MainContainer">
