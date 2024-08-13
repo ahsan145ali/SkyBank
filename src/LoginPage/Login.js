@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react'
 import axios from 'axios';
-import { sha256 } from 'js-sha256';
 import './Login.css';
 import { useState } from 'react';
-import skylogo from '../UI/sky_logo.png';
 import CustomerModel from '../Components/Utils/Customer.model';
 import { useNavigate } from "react-router-dom"
 import 'devextreme/dist/css/dx.light.css';
-import { Popup } from 'devextreme-react/popup';
-import { useAuth } from '../Context/AuthContext';
+import {useAuth} from '../Context/AuthContext';
 import { useUserContext } from '../Context/UserContext';
-import { Link } from 'react-router-dom';
+
 
 const Login = () => {
 
@@ -134,16 +131,20 @@ const Login = () => {
       console.log(res);
       storeUserDetails(res.data);
       navigate("/dashboard");
-    }).catch((error) => {
+    }).catch((error)=>{
       window.alert(error);
       console.log("Error: ", error);
     })
   }
-  useEffect(() => {
-
-
-  }, [])
+  
   //Database Functions End
+  useEffect(()=>{
+    console.log("UserDetails: " , userDetails)
+    if(Object.keys(userDetails).length !=0){
+      navigate("/dashboard");
+    }
+   
+  },[])
   return (
     <>
       <div className="MainContainer">

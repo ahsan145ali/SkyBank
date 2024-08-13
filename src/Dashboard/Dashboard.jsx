@@ -3,7 +3,6 @@ import './css/Dashboard.css';
 import logo from '../Transactions/sky-logo.png'
 import { useNavigate } from "react-router-dom"
 import { useUserContext } from '../Context/UserContext';
-import axios from 'axios';
 
 const Dashboard = () => {
     const navigate = useNavigate()
@@ -26,7 +25,7 @@ const Dashboard = () => {
                 <div className="content" >
                     <p className="heading">Balance
                         <span className="balance" >
-                            {`£${userDetails.balance}`}
+                           £{userDetails.balance}
                         </span>
                         </p>
 
