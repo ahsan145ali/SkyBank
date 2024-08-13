@@ -20,6 +20,7 @@ const PayPayee = ({ onPayment, payees, selectedPayee}) => {
       setReference('');  // Clear reference field after payment
     }
   };
+  
 
   return (
     <div style={styles.container}>

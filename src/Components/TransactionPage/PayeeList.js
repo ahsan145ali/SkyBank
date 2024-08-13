@@ -15,6 +15,12 @@ const PayeeList = () => {
   let currentDate = new Date();
   const {userDetails} = useUserContext();
 
+   const fetchPayees = async () => {
+    const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email);
+    setPayees(response.data);
+   } 
+  
+
   let TransactionDetails ={
     "description": "",
     "transactionDate":"" ,
@@ -91,6 +97,7 @@ const PayeeList = () => {
   const handleShowAddPayee = () => {
     setShowAddPayee(true);
     setShowPayPayee(false);
+    fetchPayees();
   };
 
   // Function to show the Pay Payee form
