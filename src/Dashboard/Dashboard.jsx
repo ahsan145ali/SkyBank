@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import './css/Dashboard.css';
 import logo from '../Transactions/sky-logo.png'
 import { useNavigate } from "react-router-dom"
-
+import { useUserContext } from '../Context/UserContext';
 
 const Dashboard = () => {
+    const {userDetails} = useUserContext();
     const navigate = useNavigate()
 
     const goToTransactions=()=>{
-        navigate("/homepage");
+        navigate("/transactions");
     }
 
     const goToPayeeList=()=>{
@@ -23,7 +24,7 @@ const Dashboard = () => {
                 <div className="content" >
                     <p className="heading">Balance
                         <span className="balance" >
-                            £20,000
+                           £{userDetails.balance}
                         </span>
                         </p>
 
