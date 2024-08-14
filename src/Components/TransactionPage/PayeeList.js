@@ -59,7 +59,7 @@ const PayeeList = () => {
    // Function to send payee details to the backend
    const sendPayeeToDatabase = async () => {
     try {
-        const response = await axios.post(basePayeeUrl + "/create", PayeeDetails);
+        const response = await axios.post(basePayeeUrl + "/create", PayeeDetails,{withCredentials: true});
         console.log(response);
     } catch (e) {
         window.alert(e);
@@ -67,7 +67,7 @@ const PayeeList = () => {
     }
 
     fetchPayees();
-    console.log(`Payees: ` + payees[0].firstName);
+    //console.log(`Payees: ` + payees[0].firstName);
 };
 
   // Function to delete a payee
@@ -96,7 +96,7 @@ const PayeeList = () => {
   };
   
  const sendTransactionToDatabase = async ()=>{
-  await axios.post(baseCustomerUrl +"/create",TransactionDetails).then((res)=>{
+  await axios.post(baseCustomerUrl +"/create",TransactionDetails,{withCredentials: true}).then((res)=>{
     console.log(res)
   }).catch((e)=>{
     window.alert(e);
