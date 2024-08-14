@@ -11,7 +11,7 @@ import './input.css'
 import TransactionPage from './Transactions/TransactionPage.jsx';
 import PrivateRoute from './Components/PrivateRoute.js';
 import NotFoundPage from './Error Pages/NotFoundPage.jsx';
-import UnauthorizedPage from './Error Pages/UnauthorisedPage.jsx';
+import UnauthorisedPage from './Error Pages/UnauthorisedPage.jsx';
 
 function App() {
   return (
@@ -28,9 +28,8 @@ function App() {
             <Route path='/Payeelist' element={<PayeeList />} />
             <Route path='/transactions' element={<TransactionPage />} />
           </Route>
-          <Route path="*" element={<Navigate to="/NotFound" replace />} />
-          <Route path="/NotFound" element={<NotFoundPage/>} />
-          <Route path="/unauthorised" element={<UnauthorizedPage/>} />
+          <Route path="/unauthorised" element={<UnauthorisedPage/>} />
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
 
         </UserProvider>
