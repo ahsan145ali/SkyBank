@@ -3,8 +3,11 @@ import AddPayee from './AddPayee';
 import PayPayee from './PayPayee';
 import { useUserContext } from '../../Context/UserContext';
 import axios from 'axios';
+import CustomerModel from '../../Components/Utils/Customer.model'
+
 const PayeeList = () => {
   const {userDetails} = useUserContext();
+  const {storeUserDetails} = useUserContext();
   const [payees, setPayees] = useState([]);
   const [recentPayees, setRecentPayees] = useState([]);
   const [showAddPayee, setShowAddPayee] = useState(false);
@@ -22,8 +25,8 @@ const PayeeList = () => {
    } 
 
    const updateBalance = async () => {
-    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
-    setBalance(response.data.balance);
+    //const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
+    setBalance(userDetails.balance);
    } 
 
   let TransactionDetails ={
@@ -46,7 +49,6 @@ const PayeeList = () => {
 
   // Function to add a new payee
   const addPayee = (payee) => {
-    // setPayees([...payees, payee]);
     setShowAddPayee(false);
     PayeeDetails.firstName = payee.name;
     PayeeDetails.lastName = payee.name;
@@ -90,6 +92,8 @@ const PayeeList = () => {
     TransactionDetails["transactionDate"] = currentDate;
 
     console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
+     let updatedCustomer = new CustomerModel(userDetails.firstName, userDetails.lastName, userDetails.email,null, userDetails.sortCode,userDetails.accountNumber,balance-amount);
+    storeUserDetails(updatedCustomer);
     sendTransactionToDatabase();
     setShowPayPayee(false);
     updateBalance();
@@ -148,7 +152,7 @@ const PayeeList = () => {
         </>
       ) : (
         <>
-          <h3 style={styles.balance}>Balance: ${balance}</h3>
+          <h3 style={styles.balance}>Balance: ${userDetails.balance}</h3>
           <h2 style={styles.header}>Recent Payees</h2>
           {recentPayees.map((payee, index) => (
             <div key={index} style={styles.payeeCard}>
