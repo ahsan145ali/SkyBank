@@ -26,6 +26,7 @@ const Login = () => {
   const [customerEmail, setCustomerEmail] = useState('');
   const [isPopupvisible, setPopupVisible] = useState(false);
   const [content, setContent] = useState('');
+  const [error, setError] = useState('');
   const [title, setTitle] = useState('');
   //States End
 
@@ -88,9 +89,17 @@ const Login = () => {
     await axios.post(baseCustomerUrl + "/create", customer).then((res) => {
       console.log("Posted to database", res);
       window.alert("SignUp Success");
-    }).catch((e) => {
-      console.log(`There was a problem adding: ${e.message}`);
-      window.alert("SignUp Failed " + e.message);
+    }).catch((error) => {
+      // console.log(`There was a problem adding: ${e.message}`);
+      // window.alert("SignUp Failed " + e.message);
+      const {response: {status}} = error
+      if(status === 401){
+        setError("Email already in use, please try again");
+      } else{
+        console.log(status);
+        window.alert(error);
+        console.log("Error: ", error);
+      }
     })
   }
 
@@ -105,14 +114,20 @@ const Login = () => {
     await axios.post("http://localhost:8081/login", loginRequest, {
       headers: {
         "Content-Type": 'multipart/form-data'
-      }, withCredentials: true
+      }
     })
     .then(() => {
       getLoggedInUser()
 
     }).catch((error)=>{
-      window.alert(error);
-      console.log("Error: ", error);
+      const {response: {status}} = error
+      if(status === 401){
+        setError("Incorrect email or password, please try again");
+      } else{
+        console.log(status);
+        window.alert(error);
+        console.log("Error: ", error);
+      }
     })
   }
 
@@ -138,8 +153,9 @@ const Login = () => {
       <div className="MainContainer">
         <div className={`container ${isSignUp ? 'active' : ''}`} class="container" id="container">
           <div class="form-container sign-up">
-            <form onSubmit={handleSubmitSignUp} >
+            <form onSubmit={handleSubmitSignUp} onClick={() => setError(null)}>
               <h1>Create Account</h1>
+              {error && <p className='tw-bg-red-500 tw-text-white tw-px-2 tw-text-center'>{error}</p>}
               <span>use your email for registration</span>
               <input type="text" placeholder="First Name" value={customerFirstName} onChange={event => setCustomerFirstName(event.target.value)} required />
               <input type="text" placeholder="Last Name" value={customerlastName} onChange={event => setCustomerLastName(event.target.value)} required />
@@ -149,8 +165,9 @@ const Login = () => {
             </form>
           </div>
           <div class="form-container sign-in">
-            <form onSubmit={handleSubmitSignIn}>
+            <form onSubmit={handleSubmitSignIn} onClick={() => setError(null)}>
               <h1>Sign In</h1>
+              {error && <p className='tw-bg-red-500'>{error}</p>}
               <span>use your email password</span>
               <input type="email" placeholder="Email" value={customerEmail} onChange={event => setCustomerEmail(event.target.value)} required />
               <input type="password" placeholder="Password" value={customerPassword} onChange={event => setCustomerPassword(event.target.value)} required />

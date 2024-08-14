@@ -7,7 +7,7 @@ import { useUserContext } from '../Context/UserContext';
 const PrivateRoute = () => {
   const { contextToken } = useAuth();
   const {userDetails} = useUserContext();
-  return userDetails ? <Outlet/> : <Navigate to="/" />;
+  return userDetails ? <Outlet/> : <Navigate to="/unauthorised" />;
 };
 
 export default PrivateRoute;

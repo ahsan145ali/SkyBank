@@ -31,7 +31,6 @@ function TransactionContainer() {
             <div className='tw-grid tw-grid-cols-12'>
                 <h1 className='tw-col-span-12 tw-text-center tw-font-bold'>Recent Transactions</h1>
                 <div className='tw-col-span-12 tw-grid'>
-                    {!isLoading ? renderTransactions : <p>Loading...</p>}
                     {!isLoading && renderTransactions.length === 0 && <p className='tw-text-center'>No transactions to show</p>}
                 </div>
             </div>
