@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider} from './Context/AuthContext';
+import {UserProvider} from './Context/UserContext.js'; 
+import PayeeList from './Components/TransactionPage/PayeeList';
+import Navbar from './Navbar/Navbar.js';
+import Dashboard from './Dashboard/Dashboard.jsx';
+import Homepage from './Homepage/Homepage.jsx';
+import Login from './LoginPage/Login.js';
+import './input.css'
+import TransactionPage from './Transactions/TransactionPage.jsx';
+import PrivateRoute from './Components/PrivateRoute.js';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router>
+      <AuthProvider>
+        <UserProvider>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/homepage' element={<Homepage />} />
+          <Route element={<PrivateRoute/>}>
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/Payeelist' element={<PayeeList />} />
+            <Route path='/transactions' element={<TransactionPage />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+
+        </UserProvider>
+      </AuthProvider>
+    </Router>
+
   );
 }
 
