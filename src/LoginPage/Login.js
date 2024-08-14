@@ -87,8 +87,9 @@ const Login = () => {
   /// Database Functions
   const SendUserToDatabase = async () => {
     await axios.post(baseCustomerUrl + "/create", customer).then((res) => {
-      console.log("Posted to database", res);
-      window.alert("SignUp Success");
+      // console.log("Posted to database", res);
+      // window.alert("SignUp Success");
+      getLoggedInUser();
     }).catch((error) => {
       // console.log(`There was a problem adding: ${e.message}`);
       // window.alert("SignUp Failed " + e.message);
@@ -123,7 +124,11 @@ const Login = () => {
       const {response: {status}} = error
       if(status === 401){
         setError("Incorrect email or password, please try again");
-      } else{
+      } 
+      if(status === 404){
+        setError("No account found matching email and password combination")
+      }
+      else{
         console.log(status);
         window.alert(error);
         console.log("Error: ", error);
@@ -151,9 +156,9 @@ const Login = () => {
   return (
     <>
       <div className="MainContainer">
-        <div className={`container ${isSignUp ? 'active' : ''}`} class="container" id="container">
+        <div className={`container ${isSignUp ? 'active' : ''}`} class="container" id="container" onClick={() => setError(null)}>
           <div class="form-container sign-up">
-            <form onSubmit={handleSubmitSignUp} onClick={() => setError(null)}>
+            <form onSubmit={handleSubmitSignUp} >
               <h1>Create Account</h1>
               {error && <p className='tw-bg-red-500 tw-text-white tw-px-2 tw-text-center'>{error}</p>}
               <span>use your email for registration</span>
@@ -165,9 +170,9 @@ const Login = () => {
             </form>
           </div>
           <div class="form-container sign-in">
-            <form onSubmit={handleSubmitSignIn} onClick={() => setError(null)}>
+            <form onSubmit={handleSubmitSignIn}>
               <h1>Sign In</h1>
-              {error && <p className='tw-bg-red-500'>{error}</p>}
+              {error && <p className='tw-bg-red-500 tw-text-white tw-px-2 tw-text-center'>{error}</p>}
               <span>use your email password</span>
               <input type="email" placeholder="Email" value={customerEmail} onChange={event => setCustomerEmail(event.target.value)} required />
               <input type="password" placeholder="Password" value={customerPassword} onChange={event => setCustomerPassword(event.target.value)} required />
