@@ -19,13 +19,7 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        const getBalance = async () => {
-            console.log(userDetails);
-            const request = await axios.get(`http://localhost:8081/customer/get/email/${userDetails}`,{withCredentials: true})
-            setBalance(request.data.balance);
-            setIsLoading(false)
-        }
-        getBalance()
+        setBalance(userDetails.balance);
     },[])
 
     return (
@@ -36,7 +30,7 @@ const Dashboard = () => {
                 <div className="content" >
                     <p className="heading">Balance
                         <span className="balance" >
-                           {isLoading ? "Loading..." : `£${balance}`}
+                         £{balance}
                         </span>
                         </p>
 
@@ -58,7 +52,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className ="columncontainer">
-                <div className="smallcard">
+                <div className="smallcard" onClick={goToTransactions}>
                     <div className="content">
                     <p className="smallheading">Account &rsaquo;</p>
                     </div>
