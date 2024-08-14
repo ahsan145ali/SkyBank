@@ -114,7 +114,7 @@ const Login = () => {
     await axios.post("http://localhost:8081/login", loginRequest, {
       headers: {
         "Content-Type": 'multipart/form-data'
-      }
+      }, withCredentials: true
     })
     .then(() => {
       getLoggedInUser()
