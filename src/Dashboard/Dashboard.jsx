@@ -18,6 +18,10 @@ const Dashboard = () => {
         navigate("/Payeelist");
     }
 
+    const goToSettingsPage=()=>{
+        navigate("/settings");
+    }
+
     useEffect(() => {
         setBalance(userDetails.balance);
     },[])
@@ -47,7 +51,7 @@ const Dashboard = () => {
                          <div className="aligner">
                          <img src={logo} className="imgdashboard" alt="Logo" /> &nbsp;
                          <br></br> &nbsp;
-                            <p className="smallheading">Payee List &#40;template&#41; &rsaquo;</p>
+                            <p className="smallheading">Payee List &rsaquo;</p>
                     </div>
                     </div>
                 </div>
@@ -58,9 +62,9 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <p>&nbsp;</p>
-                <div className="smallcard">
+                <div className="smallcard" onClick={goToSettingsPage}>
                     <div className="content">
-                    <p className="smallheading">Direct Debits &rsaquo;</p>
+                    <p className="smallheading">Settings &rsaquo;</p>
                     </div>
                 </div>
                 </div>
