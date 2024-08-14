@@ -85,8 +85,6 @@ const Login = () => {
 
   /// Database Functions
   const SendUserToDatabase = async () => {
-    //customer.customerPassword = getPasswordHash(customer.customerPassword); 
-
     await axios.post(baseCustomerUrl + "/create", customer).then((res) => {
       console.log("Posted to database", res);
       window.alert("SignUp Success");
@@ -96,26 +94,7 @@ const Login = () => {
     })
   }
 
-  // const CheckIfUserExists = async(action)=>{
-  //   await axios.get(baseCustomerUrl + "/get/email/"+customerEmail).then((res)=>{
-  //     console.log("Result: " , res);
-  //     if(res.data.length != 0){ //  User exists , do not send to database
-  //       if(action == "SignUp"){
-  //         window.alert("This email is already used by another user , try signing in");
-  //     }
-  //     }
-  //   }).catch((error)=>{
-  //     if(error.response.data.status == 404){
-  //       if(action == "SignUp"){    
-  //         SendUserToDatabase();
-  //       }
-  //     }else{
-  //       console.log("Error: " , error);
-  //       window.alert(error);
-  //     }
 
-  //   })
-  // }
 
 
   const Login = async () => {
@@ -130,7 +109,7 @@ const Login = () => {
     })
     .then(() => {
       getLoggedInUser()
-      // navigate("/dashboard");
+
     }).catch((error)=>{
       window.alert(error);
       console.log("Error: ", error);
@@ -138,20 +117,22 @@ const Login = () => {
   }
 
   const getLoggedInUser = async () => {
-    let {data} = await axios.get("http://localhost:8081/customer/user",{withCredentials: true})
-    storeUserDetails(data)
-    navigate("/dashboard");
-    // console.log(loggedIn);
+    //let {data} = await axios.get("http://localhost:8081/customer/user",{withCredentials: true})
+    //console.log("data: " + data);
+    await axios.get(baseCustomerUrl +"/get/email/"+customerEmail,{withCredentials: true}).then((response)=>{
+      storeUserDetails(response.data)
+      navigate("/dashboard");
+    }).catch((error)=>{
+      console.log("Error: "  + error);
+    })
   }
-  
-  //Database Functions End
-  // useEffect(()=>{
-  //   console.log("UserDetails: " , userDetails)
-  //   if(Object.keys(userDetails).length !=0){
-  //     navigate("/dashboard");
-  //   }
-   
-  // },[])
+  useEffect(()=>{
+    if(userDetails!=null)
+    {
+      navigate("/dashboard")
+    }
+
+  },[])
   return (
     <>
       <div className="MainContainer">
@@ -198,3 +179,26 @@ const Login = () => {
 }
 
 export default Login
+
+
+
+  // const CheckIfUserExists = async(action)=>{
+  //   await axios.get(baseCustomerUrl + "/get/email/"+customerEmail).then((res)=>{
+  //     console.log("Result: " , res);
+  //     if(res.data.length != 0){ //  User exists , do not send to database
+  //       if(action == "SignUp"){
+  //         window.alert("This email is already used by another user , try signing in");
+  //     }
+  //     }
+  //   }).catch((error)=>{
+  //     if(error.response.data.status == 404){
+  //       if(action == "SignUp"){    
+  //         SendUserToDatabase();
+  //       }
+  //     }else{
+  //       console.log("Error: " , error);
+  //       window.alert(error);
+  //     }
+
+  //   })
+  // }

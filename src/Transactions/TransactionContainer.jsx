@@ -12,7 +12,7 @@ function TransactionContainer() {
     let renderTransactions;
 
     useEffect(() => {
-        axios.get(`http://localhost:8081/transaction/getAll/${userDetails}`,{withCredentials: true})
+        axios.get(`http://localhost:8081/transaction/getAll/${userDetails.email}`,{withCredentials: true})
         .then(({data}) => {
             console.log(data);
             setTransactions(data)

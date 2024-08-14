@@ -17,12 +17,12 @@ const PayeeList = () => {
  
 
    const fetchPayees = async () => {
-    const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email);
+    const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email,{withCredentials: true});
     setPayees(response.data);
    } 
 
    const updateBalance = async () => {
-    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email);
+    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
     setBalance(response.data.balance);
    } 
 
