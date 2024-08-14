@@ -3,8 +3,11 @@ import AddPayee from './AddPayee';
 import PayPayee from './PayPayee';
 import { useUserContext } from '../../Context/UserContext';
 import axios from 'axios';
+import CustomerModel from '../../Components/Utils/Customer.model'
+
 const PayeeList = () => {
   const {userDetails} = useUserContext();
+  const {storeUserDetails} = useUserContext();
   const [payees, setPayees] = useState([]);
   const [recentPayees, setRecentPayees] = useState([]);
   const [showAddPayee, setShowAddPayee] = useState(false);
@@ -19,11 +22,12 @@ const PayeeList = () => {
    const fetchPayees = async () => {
     const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email,{withCredentials: true});
     setPayees(response.data);
+    setRecentPayees(response.data);
    } 
 
    const updateBalance = async () => {
-    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
-    setBalance(response.data.balance);
+    //const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
+    setBalance(userDetails.balance);
    } 
 
   let TransactionDetails ={
@@ -46,7 +50,6 @@ const PayeeList = () => {
 
   // Function to add a new payee
   const addPayee = (payee) => {
-    // setPayees([...payees, payee]);
     setShowAddPayee(false);
     PayeeDetails.firstName = payee.name;
     PayeeDetails.lastName = payee.name;
@@ -67,14 +70,23 @@ const PayeeList = () => {
     }
 
     fetchPayees();
-    //console.log(`Payees: ` + payees[0].firstName);
 };
+  const removePayeeFromDatabase = async (todeletePayee)=>{
+    console.log('todel: ' + todeletePayee.accountNumber);
+    await axios.delete(basePayeeUrl +"/remove/" +todeletePayee.accountNumber + "/" + userDetails.email,{withCredentials:true}).then((response)=>{
+      console.log("del response: " + response)
+    }).catch((error)=>{
+      console.log("error: " + error);
+    })
 
+    fetchPayees();
+  }
   // Function to delete a payee
-  const deletePayee = (payeeName) => {
-    const filteredPayees = payees.filter(payee => payee.firstName !== payeeName);
+  const deletePayee = (todeletePayee) => {
+
+    const filteredPayees = payees.filter(payee => payee.firstName !== todeletePayee.firstName);
     setPayees(filteredPayees);
-    setRecentPayees(recentPayees.filter(p => p.firstName !== payeeName));
+    setRecentPayees(recentPayees.filter(p => p.firstName !== todeletePayee.firstName));
   };
 
   // Function to handle a payment
@@ -90,6 +102,8 @@ const PayeeList = () => {
     TransactionDetails["transactionDate"] = currentDate;
 
     console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
+    let updatedCustomer = new CustomerModel(userDetails.firstName, userDetails.lastName, userDetails.email,null, userDetails.sortCode,userDetails.accountNumber,balance-amount);
+    storeUserDetails(updatedCustomer);
     sendTransactionToDatabase();
     setShowPayPayee(false);
     updateBalance();
@@ -124,11 +138,8 @@ const PayeeList = () => {
 
   useEffect(() => {
     fetchPayees();
+    setRecentPayees(payees);
   }, []);
-
-  // useEffect(() => {
-  //   updateBalance();
-  // }, []);
 
   return (
     <div style={styles.container}>
@@ -148,7 +159,7 @@ const PayeeList = () => {
         </>
       ) : (
         <>
-          <h3 style={styles.balance}>Balance: ${balance}</h3>
+          <h3 style={styles.balance}>Balance: ${userDetails.balance}</h3>
           <h2 style={styles.header}>Recent Payees</h2>
           {recentPayees.map((payee, index) => (
             <div key={index} style={styles.payeeCard}>
@@ -157,7 +168,7 @@ const PayeeList = () => {
               <p style={styles.payeeAccount}>Account Number: {payee.accountNumber}</p>
               <div style={styles.cardButtons}>
                 <button onClick={() => handleShowPayPayee(payee.firstName)} style={styles.payButton}>Pay</button>
-                <button onClick={() => deletePayee(payee.firstName)} style={styles.deleteButton}>Delete</button>
+                <button onClick={() => removePayeeFromDatabase(payee)} style={styles.deleteButton}>Delete</button>
               </div>
             </div>
           ))}
