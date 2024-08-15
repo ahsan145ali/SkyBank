@@ -11,7 +11,7 @@ import { useUserContext } from '../Context/UserContext';
 
 const Login = () => {
 
-  const baseCustomerUrl = "http://localhost:8081/customer";
+  const baseCustomerUrl = "http://3.254.23.71:8081/customer";
   const token = process.env.JWT_TOKEN; // get it from .env.local file
   const { storeContextToken } = useAuth();
   const { storeUserDetails } = useUserContext();
@@ -105,7 +105,7 @@ const Login = () => {
       "username": customerEmail,
       "password": customerPassword
     }
-    await axios.post("http://localhost:8081/login", loginRequest, {
+    await axios.post("http://3.254.23.71:8081/login", loginRequest, {
       headers: {
         "Content-Type": 'multipart/form-data'
       }, withCredentials: true
@@ -130,7 +130,7 @@ const Login = () => {
   }
 
   const getLoggedInUser = async () => {
-    //let {data} = await axios.get("http://localhost:8081/customer/user",{withCredentials: true})
+    //let {data} = await axios.get("http://3.254.23.71:8081/customer/user",{withCredentials: true})
     //console.log("data: " + data);
     await axios.get(baseCustomerUrl +"/get/email/"+customerEmail,{withCredentials: true}).then((response)=>{
       storeUserDetails(response.data)
