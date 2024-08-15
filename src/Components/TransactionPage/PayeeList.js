@@ -26,8 +26,10 @@ const PayeeList = () => {
    } 
 
    const updateBalance = async () => {
-    //const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
-    setBalance(userDetails.balance);
+    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
+    console.log("Update user: " + response);
+    storeUserDetails(response.data)
+    setBalance(response.data.balance);
    } 
 
   let TransactionDetails ={
@@ -81,37 +83,38 @@ const PayeeList = () => {
 
     fetchPayees();
   }
-  // Function to delete a payee
-  const deletePayee = (todeletePayee) => {
-
-    const filteredPayees = payees.filter(payee => payee.firstName !== todeletePayee.firstName);
-    setPayees(filteredPayees);
-    setRecentPayees(recentPayees.filter(p => p.firstName !== todeletePayee.firstName));
-  };
 
   // Function to handle a payment
   const handlePayment = (amount, payeeName, reference) => {
-    const payee = payees.find(p => p.firstName === payeeName);
-    if (payee) {
-      setRecentPayees([payee, ...recentPayees.filter(p => p.firstName !== payeeName)]);
-    }
-    TransactionDetails["description"] = reference;
-    TransactionDetails["amountOut"] = Number(amount);
-    TransactionDetails["payeeAccountNumber"]= payee["accountNumber"];
-    TransactionDetails["payeeSortCode"]= payee["sortCode"];
-    TransactionDetails["transactionDate"] = currentDate;
+    if(amount < userDetails.balance){ 
+        const payee = payees.find(p => p.firstName === payeeName);
+        if (payee) {
+          setRecentPayees([payee, ...recentPayees.filter(p => p.firstName !== payeeName)]);
+        }
+        TransactionDetails["description"] = reference;
+        TransactionDetails["amountOut"] = Number(amount);
+        TransactionDetails["payeeAccountNumber"]= payee["accountNumber"];
+        TransactionDetails["payeeSortCode"]= payee["sortCode"];
+        TransactionDetails["transactionDate"] = currentDate;
 
-    console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
-    let updatedCustomer = new CustomerModel(userDetails.firstName, userDetails.lastName, userDetails.email,null, userDetails.sortCode,userDetails.accountNumber,balance-amount);
-    storeUserDetails(updatedCustomer);
-    sendTransactionToDatabase();
-    setShowPayPayee(false);
-    updateBalance();
-  };
+        console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
+        //let updatedCustomer = new CustomerModel(userDetails.firstName, userDetails.lastName, userDetails.email,null, userDetails.sortCode,userDetails.accountNumber,balance-amount);
+        //storeUserDetails(updatedCustomer);
+        sendTransactionToDatabase();
+        setShowPayPayee(false);
+       // updateBalance();
+    }
+    else{
+      window.alert("Insufficient Balance");
+    }
+ 
+  
+  }
   
  const sendTransactionToDatabase = async ()=>{
   await axios.post(baseCustomerUrl +"/create",TransactionDetails,{withCredentials: true}).then((res)=>{
     console.log(res)
+    updateBalance();
   }).catch((e)=>{
     window.alert(e);
     console.log("Error: ",e );
