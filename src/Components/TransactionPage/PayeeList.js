@@ -142,7 +142,7 @@ const PayeeList = () => {
   }, []);
 
   return (
-    <div className='tw-h-small md:tw-h-med lg:tw-h-large tw-p-5 tw-text-center'>
+    <div className='tw-min-h-[675px] tw-p-5 tw-text-center'>
       <div style={styles.buttonContainer}>
         <button onClick={handleShowAddPayee} style={styles.button}>Add Payee</button>
         <button onClick={() => handleShowPayPayee()} style={styles.button}>Pay Payee</button>

@@ -36,7 +36,7 @@ function TransactionContainer() {
     const paginatedTransactions = transactions.slice(startIndex, endIndex);
 
     return (
-        <section className='tw-mx-6 tw-p-4 tw-shadow-md tw-h-small md:tw-h-med lg:tw-h-large'>
+        <section className='tw-mx-6 tw-p-4 tw-shadow-md tw-min-h-[600px] md:tw-min-h-[400px]'>
             <div className='tw-grid tw-grid-cols-12'>
                 <h1 className='tw-col-span-12 tw-text-center tw-font-bold'>Recent Transactions</h1>
                 <div className='tw-col-span-12 tw-grid'>
