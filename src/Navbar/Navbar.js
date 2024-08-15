@@ -41,7 +41,7 @@ const Navbar = () => {
                             </svg>
                             {userDetails ? <p className='userName'>{userDetails.firstName + " " + userDetails.lastName}</p> : <button className="button" onClick={goToLogin}>Login / Sign Up</button>}
                         </div>
-                        <img src={skylogo} width={'80px'} className='skylogo' alt="Sky Logo"></img>
+                        <Link to="/homepage"><img src={skylogo} width={'80px'} className='skylogo' alt="Sky Logo"></img></Link>
                         <button onClick={() => setIsOpen(!isOpen)}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="optionBars" width={'40px'}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
