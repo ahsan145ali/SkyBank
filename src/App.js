@@ -12,8 +12,8 @@ import TransactionPage from './Transactions/TransactionPage.jsx';
 import PrivateRoute from './Components/PrivateRoute.js';
 import NotFoundPage from './Error Pages/NotFoundPage.jsx';
 import UnauthorisedPage from './Error Pages/UnauthorisedPage.jsx';
+import Footer from './Footer/Footer.js';
 import SettingsPage from './Data/SettingsPage.jsx';
-
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
           <Route path="/unauthorised" element={<UnauthorisedPage/>} />
           <Route path="*" element={<NotFoundPage/>} />
         </Routes>
-
+        <Footer/>
         </UserProvider>
       </AuthProvider>
     </Router>
