@@ -98,11 +98,8 @@ const PayeeList = () => {
         TransactionDetails["transactionDate"] = currentDate;
 
         console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
-        //let updatedCustomer = new CustomerModel(userDetails.firstName, userDetails.lastName, userDetails.email,null, userDetails.sortCode,userDetails.accountNumber,balance-amount);
-        //storeUserDetails(updatedCustomer);
         sendTransactionToDatabase();
         setShowPayPayee(false);
-       // updateBalance();
     }
     else{
       window.alert("Insufficient Balance");
@@ -157,7 +154,7 @@ const PayeeList = () => {
         </>
       ) : showPayPayee ? (
         <>
-          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee}/>
+          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee} userbalance={userDetails.balance}/>
           <button onClick={handleBack} style={styles.button}>Back</button>
         </>
       ) : (
