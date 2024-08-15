@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TransactionItem from './TransactionItem';
 import { useUserContext } from '../Context/UserContext';
 import axios from 'axios';
-import Pagination from '@mui/material/Pagination';
+import  Pagination  from '@mui/material/Pagination';
 
 function TransactionContainer() {
     const { userDetails } = useUserContext();
