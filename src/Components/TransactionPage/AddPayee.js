@@ -13,6 +13,10 @@ const AddPayee = ({ onAddPayee }) => {
       setError('Incorrect account number. It must be 8 digits long.');
       return;
     }
+    if(sortCode.length !== 6){
+      setError('Incorrect sort number. It must be 6 digits long.');
+      return;
+    }
 
     onAddPayee({ name, sortCode, accountNumber });
     setName('');
@@ -23,7 +27,7 @@ const AddPayee = ({ onAddPayee }) => {
   };
 
   return (
-    <div style={styles.container}>
+    <div className='tw-min-h-[675px] tw-p-5 tw-text-center'>
       <h2>Add Payee</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
@@ -39,6 +43,8 @@ const AddPayee = ({ onAddPayee }) => {
           placeholder="Sort Code"
           value={sortCode}
           onChange={(e) => setSortCode(e.target.value)}
+          minLength={6}
+          maxLength={6}
           style={styles.input}
           required
         />
@@ -47,6 +53,8 @@ const AddPayee = ({ onAddPayee }) => {
           placeholder="Account Number"
           value={accountNumber}
           onChange={(e) => setAccountNumber(e.target.value)}
+          minLength={8}
+          maxLength={8}
           style={styles.input}
           required
         />

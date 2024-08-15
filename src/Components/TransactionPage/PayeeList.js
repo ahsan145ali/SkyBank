@@ -22,11 +22,14 @@ const PayeeList = () => {
    const fetchPayees = async () => {
     const response = await axios.get(basePayeeUrl + "/getAll" + "/" + userDetails.email,{withCredentials: true});
     setPayees(response.data);
+    setRecentPayees(response.data);
    } 
 
    const updateBalance = async () => {
-    //const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
-    setBalance(userDetails.balance);
+    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
+    console.log("Update user: " + response);
+    storeUserDetails(response.data)
+    setBalance(response.data.balance);
    } 
 
   let TransactionDetails ={
@@ -69,39 +72,46 @@ const PayeeList = () => {
     }
 
     fetchPayees();
-    //console.log(`Payees: ` + payees[0].firstName);
 };
+  const removePayeeFromDatabase = async (todeletePayee)=>{
+    console.log('todel: ' + todeletePayee.accountNumber);
+    await axios.delete(basePayeeUrl +"/remove/" +todeletePayee.accountNumber + "/" + userDetails.email,{withCredentials:true}).then((response)=>{
+      console.log("del response: " + response)
+    }).catch((error)=>{
+      console.log("error: " + error);
+    })
 
-  // Function to delete a payee
-  const deletePayee = (payeeName) => {
-    const filteredPayees = payees.filter(payee => payee.firstName !== payeeName);
-    setPayees(filteredPayees);
-    setRecentPayees(recentPayees.filter(p => p.firstName !== payeeName));
-  };
+    fetchPayees();
+  }
 
   // Function to handle a payment
   const handlePayment = (amount, payeeName, reference) => {
-    const payee = payees.find(p => p.firstName === payeeName);
-    if (payee) {
-      setRecentPayees([payee, ...recentPayees.filter(p => p.firstName !== payeeName)]);
-    }
-    TransactionDetails["description"] = reference;
-    TransactionDetails["amountOut"] = Number(amount);
-    TransactionDetails["payeeAccountNumber"]= payee["accountNumber"];
-    TransactionDetails["payeeSortCode"]= payee["sortCode"];
-    TransactionDetails["transactionDate"] = currentDate;
+    if(amount < userDetails.balance){ 
+        const payee = payees.find(p => p.firstName === payeeName);
+        if (payee) {
+          setRecentPayees([payee, ...recentPayees.filter(p => p.firstName !== payeeName)]);
+        }
+        TransactionDetails["description"] = reference;
+        TransactionDetails["amountOut"] = Number(amount);
+        TransactionDetails["payeeAccountNumber"]= payee["accountNumber"];
+        TransactionDetails["payeeSortCode"]= payee["sortCode"];
+        TransactionDetails["transactionDate"] = currentDate;
 
-    console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
-     let updatedCustomer = new CustomerModel(userDetails.firstName, userDetails.lastName, userDetails.email,null, userDetails.sortCode,userDetails.accountNumber,balance-amount);
-    storeUserDetails(updatedCustomer);
-    sendTransactionToDatabase();
-    setShowPayPayee(false);
-    updateBalance();
-  };
+        console.log(`Payment to ${payeeName}, Amount: $${amount}, Reference: ${reference}`);
+        sendTransactionToDatabase();
+        setShowPayPayee(false);
+    }
+    else{
+      window.alert("Insufficient Balance");
+    }
+ 
+  
+  }
   
  const sendTransactionToDatabase = async ()=>{
   await axios.post(baseCustomerUrl +"/create",TransactionDetails,{withCredentials: true}).then((res)=>{
     console.log(res)
+    updateBalance();
   }).catch((e)=>{
     window.alert(e);
     console.log("Error: ",e );
@@ -128,14 +138,11 @@ const PayeeList = () => {
 
   useEffect(() => {
     fetchPayees();
+    setRecentPayees(payees);
   }, []);
 
-  // useEffect(() => {
-  //   updateBalance();
-  // }, []);
-
   return (
-    <div style={styles.container}>
+    <div className='tw-min-h-[675px] tw-p-5 tw-text-center'>
       <div style={styles.buttonContainer}>
         <button onClick={handleShowAddPayee} style={styles.button}>Add Payee</button>
         <button onClick={() => handleShowPayPayee()} style={styles.button}>Pay Payee</button>
@@ -147,7 +154,7 @@ const PayeeList = () => {
         </>
       ) : showPayPayee ? (
         <>
-          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee}/>
+          <PayPayee payees={payees} onPayment={handlePayment} selectedPayee={selectedPayee} userbalance={userDetails.balance}/>
           <button onClick={handleBack} style={styles.button}>Back</button>
         </>
       ) : (
@@ -161,7 +168,7 @@ const PayeeList = () => {
               <p style={styles.payeeAccount}>Account Number: {payee.accountNumber}</p>
               <div style={styles.cardButtons}>
                 <button onClick={() => handleShowPayPayee(payee.firstName)} style={styles.payButton}>Pay</button>
-                <button onClick={() => deletePayee(payee.firstName)} style={styles.deleteButton}>Delete</button>
+                <button onClick={() => removePayeeFromDatabase(payee)} style={styles.deleteButton}>Delete</button>
               </div>
             </div>
           ))}

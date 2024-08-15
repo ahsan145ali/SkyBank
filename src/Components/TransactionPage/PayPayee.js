@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const PayPayee = ({ onPayment, payees, selectedPayee}) => {
+const PayPayee = ({ onPayment, payees, selectedPayee,userbalance}) => {
   const [payee, setPayee] = useState('');
   const [amount, setAmount] = useState('');
   const [reference, setReference] = useState('');  // New state for reference
@@ -12,7 +12,11 @@ const PayPayee = ({ onPayment, payees, selectedPayee}) => {
 
   const handlePay = (e) => {
     e.preventDefault();
-    if (payee && amount) {
+    if(userbalance < amount){
+      setAmount('');
+      window.alert("Insufficient Balance");
+    }
+    else if (payee && amount) {
       onPayment(parseFloat(amount), payee, reference);  // Pass the reference to onPayment
       alert(`Payment of $${amount} to ${payee} successful. Reference: ${reference}`);
       setPayee('');
@@ -23,7 +27,7 @@ const PayPayee = ({ onPayment, payees, selectedPayee}) => {
   
 
   return (
-    <div style={styles.container}>
+    <div className='tw-min-h-[675px] tw-p-5 tw-text-center'>
       <h2>Pay Payee</h2>
       <form onSubmit={handlePay} style={styles.form}>
         <select

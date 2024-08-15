@@ -10,6 +10,10 @@ import Login from './LoginPage/Login.js';
 import './input.css'
 import TransactionPage from './Transactions/TransactionPage.jsx';
 import PrivateRoute from './Components/PrivateRoute.js';
+import NotFoundPage from './Error Pages/NotFoundPage.jsx';
+import UnauthorisedPage from './Error Pages/UnauthorisedPage.jsx';
+import Footer from './Footer/Footer.js';
+import SettingsPage from './Data/SettingsPage.jsx';
 
 function App() {
   return (
@@ -19,16 +23,18 @@ function App() {
         <UserProvider>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/homepage' element={<Homepage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Homepage />} />
           <Route element={<PrivateRoute/>}>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/Payeelist' element={<PayeeList />} />
             <Route path='/transactions' element={<TransactionPage />} />
+            <Route path='/settings' element={<SettingsPage />} />
           </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/unauthorised" element={<UnauthorisedPage/>} />
+          <Route path="*" element={<NotFoundPage/>} />
         </Routes>
-
+        <Footer/>
         </UserProvider>
       </AuthProvider>
     </Router>
