@@ -18,7 +18,7 @@ function TransactionContainer() {
     };
 
     useEffect(() => {
-        axios.get(`http://localhost:8081/transaction/getAll/${userDetails.email}`, { withCredentials: true })
+        axios.get(`http://localhost:8081/transaction/getAll/${userDetails.email}/${userDetails.accountNumber}`, { withCredentials: true })
             .then(({ data }) => {
                 setTransactions(data);
                 setTotalPages(Math.ceil(data.length / itemsPerPage));
