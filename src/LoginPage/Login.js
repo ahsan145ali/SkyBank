@@ -76,13 +76,6 @@ const Login = () => {
   };
 
 
-  const renderContent = () => {
-    return (
-      <>
-        <p>{content}</p>
-      </>
-    )
-  }
 
   /// Database Functions
   const SendUserToDatabase = async () => {

@@ -13,10 +13,10 @@ const Navbar = () => {
     const LoadNavBar = () => {
 
         const goToLogin = () => {
-            navigate("/");
+            navigate("/login");
         }
         const goToHomePage = () => {
-            navigate("/homepage");
+            navigate("/");
         }
         const gotoDashboard = () => {
             navigate("/dashboard")
@@ -25,7 +25,7 @@ const Navbar = () => {
             storeUserDetails(null)
             setIsOpen(false)
         }
-        if (pageLocation.pathname === '/') {
+        if (pageLocation.pathname === '/login') {
             return (
                 <div className='login-logo-container'>
                     <img src={skylogo} width={'100px'} className='login-skylogo' onClick={goToHomePage}></img>
@@ -41,7 +41,7 @@ const Navbar = () => {
                             </svg>
                             {userDetails ? <p className='userName'>{userDetails.firstName + " " + userDetails.lastName}</p> : <button className="button" onClick={goToLogin}>Login / Sign Up</button>}
                         </div>
-                        <Link to="/homepage"><img src={skylogo} width={'80px'} className='skylogo' alt="Sky Logo"></img></Link>
+                        <Link to="/"><img src={skylogo} width={'80px'} className='skylogo' alt="Sky Logo"></img></Link>
                         <button onClick={() => setIsOpen(!isOpen)}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="optionBars" width={'40px'}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
@@ -61,15 +61,15 @@ const Navbar = () => {
                                 </button>
                             </div>
                             <ul className='tw-mt-4'>
-                                <li className='tw-my-2'><Link to="/homepage" onClick={() => setIsOpen(false)}>Home</Link></li>
+                                <li className='tw-my-2'><Link to="/" onClick={() => setIsOpen(false)}>Home</Link></li>
                                 {userDetails ? (
                                     <>
                                         <li className='tw-my-2'><Link to="/dashboard" onClick={() => setIsOpen(false)}>Dashboard</Link></li>
                                         <li className='tw-my-2'><Link to="/transactions" onClick={() => setIsOpen(false)}>Transactions</Link></li>
                                         <li className='tw-my-2'><Link to="/PayeeList" onClick={() => setIsOpen(false)}>Pay a contact</Link></li>
-                                        <li className='tw-my-2'><Link to="/" onClick={LogoutUser}>Logout</Link></li>
+                                        <li className='tw-my-2'><Link to="/login" onClick={LogoutUser}>Logout</Link></li>
                                     </>
-                                ) : <li className='tw-my-2'><Link to="/">Login/Sign Up</Link></li>
+                                ) : <li className='tw-my-2'><Link to="/login">Login/Sign Up</Link></li>
                                 }
                             </ul>
                         </div>

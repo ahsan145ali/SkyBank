@@ -18,7 +18,7 @@ const Homepage = () => {
     const navigate = useNavigate();
 
     const goToLogin = () => {
-        navigate("/");
+        navigate("/login");
     }
     return (
         <div className='bodyContainer'>

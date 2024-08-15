@@ -11,7 +11,7 @@ const Footer = () => {
   const {userDetails} = useUserContext();
 
   const goToLogin = () => {
-    navigate("/");
+    navigate("/login");
 }
   return (
     <footer>
