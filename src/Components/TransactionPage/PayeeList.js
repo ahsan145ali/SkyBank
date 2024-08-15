@@ -14,8 +14,8 @@ const PayeeList = () => {
   const [showPayPayee, setShowPayPayee] = useState(false);
   const [selectedPayee, setSelectedPayee] = useState(null);
   const [balance, setBalance] = useState(userDetails.balance);
-  const baseCustomerUrl = "http://localhost:8081/transaction";
-  const basePayeeUrl = "http://localhost:8081/payee";
+  const baseCustomerUrl = "http://3.254.23.71:8081/transaction";
+  const basePayeeUrl = "http://3.254.23.71:8081/payee";
   let currentDate = new Date();
  
 
@@ -26,7 +26,7 @@ const PayeeList = () => {
    } 
 
    const updateBalance = async () => {
-    const response = await axios.get("http://localhost:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
+    const response = await axios.get("http://3.254.23.71:8081/customer" + "/get/email" + "/" + userDetails.email,{withCredentials: true});
     console.log("Update user: " + response);
     storeUserDetails(response.data)
     setBalance(response.data.balance);
