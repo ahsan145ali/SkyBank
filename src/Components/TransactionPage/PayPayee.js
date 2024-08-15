@@ -27,7 +27,7 @@ const PayPayee = ({ onPayment, payees, selectedPayee,userbalance}) => {
   
 
   return (
-    <div style={styles.container}>
+    <div className='tw-h-small md:tw-h-med lg:tw-h-large tw-p-5 tw-text-center'>
       <h2>Pay Payee</h2>
       <form onSubmit={handlePay} style={styles.form}>
         <select

@@ -23,8 +23,8 @@ function App() {
         <UserProvider>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Login />} />
-          <Route path='/homepage' element={<Homepage />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/' element={<Homepage />} />
           <Route element={<PrivateRoute/>}>
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/Payeelist' element={<PayeeList />} />

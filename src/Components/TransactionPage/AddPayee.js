@@ -27,7 +27,7 @@ const AddPayee = ({ onAddPayee }) => {
   };
 
   return (
-    <div style={styles.container}>
+    <div className='tw-h-small md:tw-h-med lg:tw-h-large tw-p-5 tw-text-center'>
       <h2>Add Payee</h2>
       <form onSubmit={handleSubmit} style={styles.form}>
         <input
